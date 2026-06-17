@@ -1,0 +1,127 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradient(135deg,#e0eaff,#f5f0ff,#ffe8f0);min-height:500px;color:#1a1a2e}
+.shell{max-width:680px;margin:0 auto;padding:14px}
+.hdr{text-align:center;padding:16px 0 12px}
+.logo{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#378ADD,#534AB7);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;box-shadow:0 8px 20px rgba(55,138,221,0.3)}
+.logo i{font-size:22px;color:#fff}
+.hdr h1{font-size:19px;font-weight:500}
+.hdr p{font-size:12px;color:#666;margin-top:2px}
+.nav{display:flex;background:rgba(255,255,255,0.65);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.8);border-radius:16px;padding:4px;gap:3px;margin-bottom:14px}
+.nav button{flex:1;padding:9px 5px;border:none;background:transparent;border-radius:12px;cursor:pointer;font-size:12px;font-weight:500;color:#666;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav button i{font-size:18px}
+.nav button.on{background:rgba(255,255,255,0.92);color:#185FA5;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+.pg{display:none}
+.card{background:rgba(255,255,255,0.68);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.85);border-radius:16px;padding:16px;margin-bottom:12px}
+.lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.f{display:flex;flex-direction:column;gap:4px}
+.f label{font-size:12px;font-weight:500;color:#666}
+.f input,.f select,.f textarea{padding:9px 11px;border:1.5px solid rgba(200,210,230,0.6);border-radius:10px;font-size:14px;background:rgba(255,255,255,0.8);width:100%}
+.f input:focus,.f select:focus{outline:none;border-color:#378ADD}
+.clock{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:rgba(230,241,251,0.8);font-size:14px;font-weight:500;color:#185FA5;margin-bottom:6px}
+.insta input{border-color:rgba(193,53,132,0.3)}
+.upbox{border:2px dashed rgba(55,138,221,0.35);border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:rgba(230,241,251,0.3)}
+.upbox .t{font-size:13px;font-weight:500;color:#185FA5}
+.upbox .s{font-size:11px;color:#888;margin-top:3px}
+.preview{display:none;align-items:center;gap:10px;padding:9px;background:rgba(234,243,222,0.5);border-radius:10px}
+.preview img{width:60px;height:60px;border-radius:8px;object-fit:cover}
+.btn-main{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff;font-size:15px;font-weight:500;cursor:pointer;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat{background:rgba(255,255,255,0.7);border-radius:12px;padding:10px;text-align:center}
+.stat .n{font-size:18px;font-weight:600}
+.stat .l{font-size:10px;color:#888}
+.gcard{background:rgba(255,255,255,0.72);border-radius:14px;padding:11px 13px;margin-bottom:8px}
+.gtop{display:flex;align-items:center;gap:10px}
+.gav{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.gavp{width:44px;height:44px;border-radius:10px;background:#E6F1FB;display:flex;align-items:center;justify-content:center}
+.gi{flex:1;min-width:0;font-size:13px}
+.gn{font-weight:500}
+.gm{font-size:11px;color:#666;margin-top:1px}
+.bdg{font-size:10px;padding:2px 7px;border-radius:10px;margin-left:5px}
+.bin{background:#EAF3DE;color:#3B6D11}.bout{background:#FCEBEB;color:#A32D2D}
+.tinfo{margin-top:6px;padding:5px 9px;background:rgba(250,238,218,0.4);border-radius:7px;font-size:10px;color:#633806}
+.abtn{padding:5px 9px;border-radius:8px;font-size:11px;border:none;cursor:pointer}
+.bco{background:#FAEEDA;color:#633806}
+.bdl{background:#FCEBEB;color:#A32D2D}
+.toast{padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:10px;display:none}
+.ts{background:#EAF3DE;color:#3B6D11}.te{background:#FCEBEB;color:#A32D2D}
+</style>
+<div class="shell">
+<div class="hdr"><div class="logo"><i class="ti ti-building"></i></div><h1>Guesthouse Manager</h1><p>Check-in / Checkout records</p></div>
+<div class="nav">
+<button class="on" onclick="gp('ci',this)"><i class="ti ti-door-enter"></i>Check-in</button>
+<button onclick="gp('rc',this)"><i class="ti ti-users"></i>Guests</button>
+</div>
+<div id="ci" class="pg" style="display:block">
+<div id="tst" class="toast"></div>
+<div class="card"><div class="lbl">Auto time</div><div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div></div>
+<div class="card">
+<div class="lbl">Guest details</div>
+<div class="row">
+<div class="f"><label>Naam</label><input id="fn" placeholder="Rahul Sharma"/></div>
+<div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="10 digit"/></div>
+<div class="f"><label>Room</label><input id="fr" placeholder="101"/></div>
+<div class="f"><label>Kiraya ₹/raat</label><input id="fk" type="number" placeholder="800"/></div>
+</div>
+</div>
+<div class="card">
+<div class="lbl">ID Proof</div>
+<div class="f insta" style="margin-bottom:8px"><label><i class="ti ti-brand-instagram" style="color:#C13584"></i> Instagram photo link</label><input id="fi" placeholder="https://instagram.com/p/..."/></div>
+<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Ya seedha photo upload karein</div><div class="s">JPG/PNG</div></div>
+<input type="file" id="fp" accept="image/*" style="display:none" onchange="op(event)"/>
+<div id="pp" class="preview"><img id="pim"/><div id="pname" style="font-size:12px"></div></div>
+</div>
+<button class="btn-main" onclick="sv()">Check-in Save Karein</button>
+</div>
+<div id="rc" class="pg">
+<div class="stats">
+<div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
+<div class="stat"><div class="n" id="sa">0</div><div class="l">Aahe</div></div>
+<div class="stat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
+</div>
+<div id="gl"></div>
+</div>
+</div>
+<script>
+let G=JSON.parse(localStorage.getItem('gh5')||'[]');
+let pUrl=null;
+function now(){const n=new Date();return{date:n.toLocaleDateString('en-IN'),time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true})};}
+function tick(){document.getElementById('clk').textContent=now().date+' · '+now().time;}
+tick();setInterval(tick,1000);
+function gp(id,btn){document.querySelectorAll('.pg').forEach(p=>p.style.display='none');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));document.getElementById(id).style.display='block';btn.classList.add('on');if(id==='rc')rg();}
+function op(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{pUrl=ev.target.result;document.getElementById('pim').src=pUrl;document.getElementById('pname').textContent=f.name;document.getElementById('pp').style.display='flex';};r.readAsDataURL(f);}
+function toast(msg,type){const el=document.getElementById('tst');el.className='toast '+type;el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',3000);}
+function sv(){
+  const naam=document.getElementById('fn').value.trim();
+  const mobile=document.getElementById('fm').value.trim();
+  const room=document.getElementById('fr').value.trim();
+  if(!naam||!mobile||!room){toast('Naam, mobile, room zaroori hai','te');return;}
+  const n=now();
+  const g={id:'G'+Date.now(),naam,mobile,room,kiraya:document.getElementById('fk').value,instaLink:document.getElementById('fi').value.trim(),photoUrl:pUrl,ciDate:n.date,ciTime:n.time,coDate:'',coTime:'',status:'checked-in'};
+  G.unshift(g);localStorage.setItem('gh5',JSON.stringify(G));
+  toast(naam+' check-in ho gaya! '+n.time,'ts');
+  ['fn','fm','fr','fk','fi'].forEach(id=>document.getElementById(id).value='');
+  pUrl=null;document.getElementById('pp').style.display='none';
+}
+function rg(){
+  const act=G.filter(g=>g.status==='checked-in').length;
+  document.getElementById('st').textContent=G.length;
+  document.getElementById('sa').textContent=act;
+  document.getElementById('se').textContent='₹'+G.reduce((s,g)=>s+(Number(g.kiraya)||0),0).toLocaleString('en-IN');
+  document.getElementById('gl').innerHTML=G.map(g=>`
+  <div class="gcard">
+  <div class="gtop">
+  ${g.photoUrl?`<img class="gav" src="${g.photoUrl}"/>`:`<div class="gavp"><i class="ti ti-user"></i></div>`}
+  <div class="gi"><div class="gn">${g.naam}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aahe':'Gaye'}</span></div>
+  <div class="gm">Room ${g.room} · ${g.mobile} ${g.kiraya?'· ₹'+g.kiraya:''}</div></div>
+  ${g.status==='checked-in'?`<button class="abtn bco" onclick="dco('${g.id}')">Out</button>`:''}
+  <button class="abtn bdl" onclick="dg('${g.id}')"><i class="ti ti-trash"></i></button>
+  </div>
+  <div class="tinfo">In: ${g.ciDate} ${g.ciTime} ${g.coDate?'· Out: '+g.coDate+' '+g.coTime:''} ${g.instaLink?'· <a href="'+g.instaLink+'" target="_blank" style="color:#C13584">Insta ID</a>':''}</div>
+  </div>`).join('')||'<p style="text-align:center;color:#999;padding:20px">Koi guest nahi</p>';
+}
+function dco(id){const g=G.find(x=>x.id===id);const n=now();g.status='checked-out';g.coDate=n.date;g.coTime=n.time;localStorage.setItem('gh5',JSON.stringify(G));rg();}
+function dg(id){if(!confirm('Delete?'))return;G=G.filter(x=>x.id!==id);localStorage.setItem('gh5',JSON.stringify(G));rg();}
+</script>
