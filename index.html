@@ -49,36 +49,35 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .ts{background:#EAF3DE;color:#3B6D11}.te{background:#FCEBEB;color:#A32D2D}
 </style>
 <div class="shell">
-<div class="hdr"><div class="logo"><i class="ti ti-building"></i></div><h1>Guesthouse Manager</h1><p>Check-in / Checkout records</p></div>
+<div class="hdr"><div class="logo"><i class="ti ti-building"></i></div><h1>Shree Vilas Palace Manager</h1><p>Check-In / Check-Out Records</p></div>
 <div class="nav">
-<button class="on" onclick="gp('ci',this)"><i class="ti ti-door-enter"></i>Check-in</button>
+<button class="on" onclick="gp('ci',this)"><i class="ti ti-door-enter"></i>Check-In</button>
 <button onclick="gp('rc',this)"><i class="ti ti-users"></i>Guests</button>
 </div>
 <div id="ci" class="pg" style="display:block">
 <div id="tst" class="toast"></div>
-<div class="card"><div class="lbl">Auto time</div><div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div></div>
+<div class="card"><div class="lbl">Current Time & Date</div><div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div></div>
 <div class="card">
-<div class="lbl">Guest details</div>
+<div class="lbl">Guest Details</div>
 <div class="row">
-<div class="f"><label>Naam</label><input id="fn" placeholder="Rahul Sharma"/></div>
-<div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="10 digit"/></div>
+<div class="f"><label>Name</label><input id="fn" placeholder="Name"/></div>
+<div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="+91 "/></div>
 <div class="f"><label>Room</label><input id="fr" placeholder="101"/></div>
-<div class="f"><label>Kiraya ₹/raat</label><input id="fk" type="number" placeholder="800"/></div>
+<div class="f"><label>Fare</label><input id="fk" type="number" placeholder="₹ "/></div>
 </div>
 </div>
 <div class="card">
 <div class="lbl">ID Proof</div>
-<div class="f insta" style="margin-bottom:8px"><label><i class="ti ti-brand-instagram" style="color:#C13584"></i> Instagram photo link</label><input id="fi" placeholder="https://instagram.com/p/..."/></div>
-<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Ya seedha photo upload karein</div><div class="s">JPG/PNG</div></div>
+<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Upload Aadhar Card</div><div class="s">JPG/PNG</div></div>
 <input type="file" id="fp" accept="image/*" style="display:none" onchange="op(event)"/>
 <div id="pp" class="preview"><img id="pim"/><div id="pname" style="font-size:12px"></div></div>
 </div>
-<button class="btn-main" onclick="sv()">Check-in Save Karein</button>
+<button class="btn-main" onclick="sv()">Check-In Save</button>
 </div>
 <div id="rc" class="pg">
 <div class="stats">
 <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
-<div class="stat"><div class="n" id="sa">0</div><div class="l">Aahe</div></div>
+<div class="stat"><div class="n" id="sa">0</div><div class="l">Income</div></div>
 <div class="stat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
 </div>
 <div id="gl"></div>
@@ -114,7 +113,7 @@ function rg(){
   <div class="gcard">
   <div class="gtop">
   ${g.photoUrl?`<img class="gav" src="${g.photoUrl}"/>`:`<div class="gavp"><i class="ti ti-user"></i></div>`}
-  <div class="gi"><div class="gn">${g.naam}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aahe':'Gaye'}</span></div>
+  <div class="gi"><div class="gn">${g.naam}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aaye':'Gaye'}</span></div>
   <div class="gm">Room ${g.room} · ${g.mobile} ${g.kiraya?'· ₹'+g.kiraya:''}</div></div>
   ${g.status==='checked-in'?`<button class="abtn bco" onclick="dco('${g.id}')">Out</button>`:''}
   <button class="abtn bdl" onclick="dg('${g.id}')"><i class="ti ti-trash"></i></button>
