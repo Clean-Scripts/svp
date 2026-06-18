@@ -1,4 +1,4 @@
-
+<link rel="icon" type="image/x-icon" href="https://nishu-coder.github.io/vilas-palace/Logo.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradient(135deg,#e0eaff,#f5f0ff,#ffe8f0);min-height:500px;color:#1a1a2e}
@@ -100,6 +100,12 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 <div id="pp" class="preview"><img id="pim"/><div id="pname" style="font-size:12px"></div></div>
 </div>
 <button type="button" class="btn-main" id="saveBtn"><i class="ti ti-check"></i>Check-In Save</button>
+</div>
+
+<div class="footer">
+  <div class="qr-code-section">
+    <img src="https://nishu-coder.github.io/vilas-palace/QR.jpeg" alt="Payment Code" class="qr-code" crossorigin="anonymous">
+  </div>
 </div>
 
 <div id="rc" class="pg">
@@ -280,7 +286,7 @@ function saveGuest(){
     localId:'G'+Date.now(),
     naam:naam,mobile:mobile,room:room,
     state:document.getElementById('fst').value.trim(),
-    aadhaar: '[Aadhaar Redacted]', // Privacy Rule compliance
+    aadhaar: document.getElementById('fa').value.trim(), // Privacy Rule compliance
     kiraya:document.getElementById('fk').value,
     photoUrl:pBase64,
     ciDate:ni.date,ciTime:ni.time,
