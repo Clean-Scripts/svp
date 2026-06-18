@@ -1,3 +1,5 @@
+https://script.google.com/macros/s/AKfycbwry70HoYifxw1x-zgwjU1Kp2LLa5y7LoQJCG2plgWc3Twake7e7gPNkxJ1MaDKKnMi/exec
+
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -14,20 +16,21 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .nav button.on{background:rgba(255,255,255,0.92);color:#185FA5;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
 .pg{display:none}
 .card{background:rgba(255,255,255,0.68);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.85);border-radius:16px;padding:16px;margin-bottom:12px}
-.lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px;justify-content:space-between}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .f{display:flex;flex-direction:column;gap:4px}
 .f label{font-size:12px;font-weight:500;color:#666}
 .f input,.f select,.f textarea{padding:9px 11px;border:1.5px solid rgba(200,210,230,0.6);border-radius:10px;font-size:14px;background:rgba(255,255,255,0.8);width:100%}
 .f input:focus,.f select:focus{outline:none;border-color:#378ADD}
 .clock{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:rgba(230,241,251,0.8);font-size:14px;font-weight:500;color:#185FA5;margin-bottom:6px}
-.insta input{border-color:rgba(193,53,132,0.3)}
 .upbox{border:2px dashed rgba(55,138,221,0.35);border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:rgba(230,241,251,0.3)}
 .upbox .t{font-size:13px;font-weight:500;color:#185FA5}
 .upbox .s{font-size:11px;color:#888;margin-top:3px}
 .preview{display:none;align-items:center;gap:10px;padding:9px;background:rgba(234,243,222,0.5);border-radius:10px}
 .preview img{width:60px;height:60px;border-radius:8px;object-fit:cover}
-.btn-main{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff;font-size:15px;font-weight:500;cursor:pointer;margin-top:4px}
+.btn-main{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff;font-size:15px;font-weight:500;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-main:disabled{opacity:0.6;cursor:not-allowed}
+.btn-secondary{width:100%;padding:10px;border:1px solid rgba(55,138,221,0.3);border-radius:11px;background:rgba(230,241,251,0.5);color:#185FA5;font-size:13px;font-weight:500;cursor:pointer;margin-top:8px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .stat{background:rgba(255,255,255,0.7);border-radius:12px;padding:10px;text-align:center}
 .stat .n{font-size:18px;font-weight:600}
@@ -41,19 +44,25 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .gm{font-size:11px;color:#666;margin-top:1px}
 .bdg{font-size:10px;padding:2px 7px;border-radius:10px;margin-left:5px}
 .bin{background:#EAF3DE;color:#3B6D11}.bout{background:#FCEBEB;color:#A32D2D}
-.tinfo{margin-top:6px;padding:5px 9px;background:rgba(250,238,218,0.4);border-radius:7px;font-size:10px;color:#633806}
+.tinfo{margin-top:6px;padding:5px 9px;background:rgba(250,238,218,0.4);border-radius:7px;font-size:10px;color:#633806;display:flex;gap:8px;flex-wrap:wrap}
 .abtn{padding:5px 9px;border-radius:8px;font-size:11px;border:none;cursor:pointer}
 .bco{background:#FAEEDA;color:#633806}
 .bdl{background:#FCEBEB;color:#A32D2D}
-.toast{padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:10px;display:none}
-.ts{background:#EAF3DE;color:#3B6D11}.te{background:#FCEBEB;color:#A32D2D}
+.toast{padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:10px;display:none;align-items:center;gap:6px}
+.ts{background:#EAF3DE;color:#3B6D11}.te{background:#FCEBEB;color:#A32D2D}.tinf{background:#E6F1FB;color:#185FA5}
+.statusdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+.dot-green{background:#3B6D11}.dot-red{background:#A32D2D}.dot-gray{background:#999}
+.setup-box{background:rgba(255,255,255,0.6);border-radius:12px;padding:10px;font-size:11px;color:#666;margin-top:8px}
+.setup-box code{background:rgba(0,0,0,0.05);padding:1px 5px;border-radius:4px;font-size:10px}
 </style>
 <div class="shell">
 <div class="hdr"><div class="logo"><i class="ti ti-building"></i></div><h1>Shree Vilas Palace Manager</h1><p>Check-In / Check-Out Records</p></div>
 <div class="nav">
 <button class="on" onclick="gp('ci',this)"><i class="ti ti-door-enter"></i>Check-In</button>
 <button onclick="gp('rc',this)"><i class="ti ti-users"></i>Guests</button>
+<button onclick="gp('se',this)"><i class="ti ti-settings"></i>Setup</button>
 </div>
+
 <div id="ci" class="pg" style="display:block">
 <div id="tst" class="toast"></div>
 <div class="card"><div class="lbl">Current Time & Date</div><div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div></div>
@@ -62,48 +71,195 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 <div class="row">
 <div class="f"><label>Name</label><input id="fn" placeholder="Name"/></div>
 <div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="+91 "/></div>
-<div class="f"><label>Room</label><input id="fr" placeholder="101"/></div>
-<div class="f"><label>Fare</label><input id="fk" type="number" placeholder="₹ "/></div>
+<div class="f"><label>Room No.</label><input id="fr" placeholder="101"/></div>
+<div class="f"><label>State</label><input id="fst" placeholder="UP, Bihar..."/></div>
+<div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit"/></div>
+<div class="f"><label>Fare ₹</label><input id="fk" type="number" placeholder="₹ "/></div>
 </div>
 </div>
 <div class="card">
 <div class="lbl">ID Proof</div>
-<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Upload Aadhar Card</div><div class="s">JPG/PNG</div></div>
+<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Upload Aadhar Card</div><div class="s">JPG/PNG — Google Drive mein save hoga</div></div>
 <input type="file" id="fp" accept="image/*" style="display:none" onchange="op(event)"/>
 <div id="pp" class="preview"><img id="pim"/><div id="pname" style="font-size:12px"></div></div>
 </div>
-<button class="btn-main" onclick="sv()">Check-In Save</button>
+<button class="btn-main" id="saveBtn" onclick="sv()"><i class="ti ti-check"></i>Check-In Save</button>
 </div>
+
 <div id="rc" class="pg">
 <div class="stats">
 <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
-<div class="stat"><div class="n" id="sa">0</div><div class="l">Income</div></div>
+<div class="stat"><div class="n" id="sa">0</div><div class="l">Currently In</div></div>
 <div class="stat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
 </div>
-<div id="gl"></div>
+<button class="btn-secondary" onclick="loadFromSheet()"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
+<div id="gl" style="margin-top:10px"></div>
 </div>
+
+<div id="se" class="pg">
+<div class="card">
+<div class="lbl">Google Sheet Connection <span id="connDot"><span class="statusdot dot-gray"></span>Not connected</span></div>
+<div class="f" style="margin-bottom:8px"><label>Apps Script Web App URL</label><input id="scriptUrl" placeholder="https://script.google.com/macros/s/..."/></div>
+<button class="btn-main" onclick="saveSettings()"><i class="ti ti-device-floppy"></i>Save & Test Connection</button>
+<div class="setup-box">
+<b>Setup steps:</b><br>
+1. Apni Sheet kholo → <code>Extensions → Apps Script</code><br>
+2. Diya gaya code paste karo, Save karo<br>
+3. <code>Run → setup</code> ek baar chalao (Drive folder banega)<br>
+4. <code>Deploy → New deployment → Web app</code><br>
+5. Execute as: <b>Me</b>, Access: <b>Anyone</b><br>
+6. URL copy karke yahan paste karo
+</div>
+</div>
+</div>
+
 </div>
 <script>
-let G=JSON.parse(localStorage.getItem('gh5')||'[]');
-let pUrl=null;
-function now(){const n=new Date();return{date:n.toLocaleDateString('en-IN'),time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true})};}
+let G=JSON.parse(localStorage.getItem('svp_guests')||'[]');
+let CFG=JSON.parse(localStorage.getItem('svp_cfg')||'{}');
+let pBase64=null;
+let pFileMeta=null;
+
+function now(){const n=new Date();return{date:n.toLocaleDateString('en-GB').replace(/\//g,'/'),time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})};}
 function tick(){document.getElementById('clk').textContent=now().date+' · '+now().time;}
 tick();setInterval(tick,1000);
-function gp(id,btn){document.querySelectorAll('.pg').forEach(p=>p.style.display='none');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));document.getElementById(id).style.display='block';btn.classList.add('on');if(id==='rc')rg();}
-function op(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{pUrl=ev.target.result;document.getElementById('pim').src=pUrl;document.getElementById('pname').textContent=f.name;document.getElementById('pp').style.display='flex';};r.readAsDataURL(f);}
-function toast(msg,type){const el=document.getElementById('tst');el.className='toast '+type;el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',3000);}
-function sv(){
+
+function gp(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.style.display='none');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).style.display='block';
+  btn.classList.add('on');
+  if(id==='rc')rg();
+  if(id==='se')loadSettingsUI();
+}
+
+function op(e){
+  const f=e.target.files[0];if(!f)return;
+  pFileMeta=f;
+  const r=new FileReader();
+  r.onload=ev=>{
+    pBase64=ev.target.result;
+    document.getElementById('pim').src=pBase64;
+    document.getElementById('pname').textContent=f.name+' ('+Math.round(f.size/1024)+' KB)';
+    document.getElementById('pp').style.display='flex';
+  };
+  r.readAsDataURL(f);
+}
+
+function toast(msg,type){
+  const el=document.getElementById('tst');
+  el.className='toast '+type;
+  el.innerHTML='<i class="ti ti-'+(type==='ts'?'check':type==='te'?'alert-circle':'info-circle')+'"></i> '+msg;
+  el.style.display='flex';
+  setTimeout(()=>el.style.display='none',3500);
+}
+
+function loadSettingsUI(){
+  if(CFG.scriptUrl)document.getElementById('scriptUrl').value=CFG.scriptUrl;
+  const dot=document.getElementById('connDot');
+  if(CFG.scriptUrl){
+    dot.innerHTML='<span class="statusdot dot-green"></span>Connected';
+  }else{
+    dot.innerHTML='<span class="statusdot dot-gray"></span>Not connected';
+  }
+}
+
+async function saveSettings(){
+  const url=document.getElementById('scriptUrl').value.trim();
+  if(!url){toast('URL daalo pehle','te');return;}
+  CFG.scriptUrl=url;
+  localStorage.setItem('svp_cfg',JSON.stringify(CFG));
+  toast('Settings saved! Connection test ho raha hai...','tinf');
+  loadSettingsUI();
+}
+
+async function sv(){
   const naam=document.getElementById('fn').value.trim();
   const mobile=document.getElementById('fm').value.trim();
   const room=document.getElementById('fr').value.trim();
-  if(!naam||!mobile||!room){toast('Naam, mobile, room zaroori hai','te');return;}
+  if(!naam||!mobile||!room){toast('Name, Mobile, Room zaroori hai','te');return;}
+
+  const btn=document.getElementById('saveBtn');
+  btn.disabled=true;
+  btn.innerHTML='<i class="ti ti-loader-2"></i> Saving...';
+  toast('Save ho raha hai...','tinf');
+
   const n=now();
-  const g={id:'G'+Date.now(),naam,mobile,room,kiraya:document.getElementById('fk').value,instaLink:document.getElementById('fi').value.trim(),photoUrl:pUrl,ciDate:n.date,ciTime:n.time,coDate:'',coTime:'',status:'checked-in'};
-  G.unshift(g);localStorage.setItem('gh5',JSON.stringify(G));
-  toast(naam+' check-in ho gaya! '+n.time,'ts');
-  ['fn','fm','fr','fk','fi'].forEach(id=>document.getElementById(id).value='');
-  pUrl=null;document.getElementById('pp').style.display='none';
+  const g={
+    localId:'G'+Date.now(),
+    naam,mobile,room,
+    state:document.getElementById('fst').value.trim(),
+    aadhaar:document.getElementById('fa').value.trim(),
+    kiraya:document.getElementById('fk').value,
+    photoUrl:pBase64,
+    ciDate:n.date,ciTime:n.time,
+    coDate:'',coTime:'',
+    sNo:'',
+    status:'checked-in'
+  };
+
+  if(CFG.scriptUrl){
+    try{
+      const payload={
+        action:'add',naam:g.naam,mobile:g.mobile,room:g.room,
+        state:g.state,aadhaar:g.aadhaar,
+        ciDate:g.ciDate,ciTime:g.ciTime
+      };
+      if(pBase64) payload.photoBase64=pBase64;
+
+      const res=await fetch(CFG.scriptUrl,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      });
+      const data=await res.json();
+      if(data.ok){
+        g.sNo=data.sNo;
+        g.photoUrl=data.photoUrl||g.photoUrl;
+        toast(naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo,'ts');
+      }else{
+        toast('Sheet error: '+(data.error||'unknown')+' — local mein save kiya','te');
+      }
+    }catch(err){
+      toast('Sheet se connect nahi hua — local mein save kiya. Setup check karein.','te');
+    }
+  }else{
+    toast(naam+' local mein save ho gaya. Sheet connect karne ke liye Setup tab dekho.','tinf');
+  }
+
+  G.unshift(g);
+  localStorage.setItem('svp_guests',JSON.stringify(G));
+
+  ['fn','fm','fr','fst','fa','fk'].forEach(id=>document.getElementById(id).value='');
+  pBase64=null;pFileMeta=null;
+  document.getElementById('fp').value='';
+  document.getElementById('pp').style.display='none';
+  btn.disabled=false;
+  btn.innerHTML='<i class="ti ti-check"></i>Check-In Save';
 }
+
+async function loadFromSheet(){
+  if(!CFG.scriptUrl){toast('Pehle Setup tab mein Sheet connect karo','te');return;}
+  toast('Sheet se data load ho raha hai...','tinf');
+  try{
+    const res=await fetch(CFG.scriptUrl);
+    const rows=await res.json();
+    if(!Array.isArray(rows)||rows.length<2){toast('Sheet khaali hai ya format match nahi hua','te');return;}
+    const headers=rows[0];
+    const newG=rows.slice(1).filter(r=>r[0]).map(r=>({
+      sNo:r[0],ciDate:r[1],ciTime:r[2],naam:r[3],aadhaar:r[4],mobile:r[5],room:r[6],
+      state:r[8],coDate:r[9],coTime:r[10],photoUrl:r[11]||'',
+      status:r[9]?'checked-out':'checked-in',kiraya:''
+    })).reverse();
+    G=newG;
+    localStorage.setItem('svp_guests',JSON.stringify(G));
+    rg();
+    toast(G.length+' records sheet se load hue','ts');
+  }catch(err){
+    toast('Load fail hua: '+err.message,'te');
+  }
+}
+
 function rg(){
   const act=G.filter(g=>g.status==='checked-in').length;
   document.getElementById('st').textContent=G.length;
@@ -112,15 +268,40 @@ function rg(){
   document.getElementById('gl').innerHTML=G.map(g=>`
   <div class="gcard">
   <div class="gtop">
-  ${g.photoUrl?`<img class="gav" src="${g.photoUrl}"/>`:`<div class="gavp"><i class="ti ti-user"></i></div>`}
-  <div class="gi"><div class="gn">${g.naam}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aaye':'Gaye'}</span></div>
-  <div class="gm">Room ${g.room} · ${g.mobile} ${g.kiraya?'· ₹'+g.kiraya:''}</div></div>
-  ${g.status==='checked-in'?`<button class="abtn bco" onclick="dco('${g.id}')">Out</button>`:''}
-  <button class="abtn bdl" onclick="dg('${g.id}')"><i class="ti ti-trash"></i></button>
+  ${g.photoUrl&&g.photoUrl.startsWith('data:')?`<img class="gav" src="${g.photoUrl}"/>`:g.photoUrl?`<div class="gavp"><i class="ti ti-link"></i></div>`:`<div class="gavp"><i class="ti ti-user"></i></div>`}
+  <div class="gi"><div class="gn">${g.naam||'—'}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aaye':'Gaye'}</span></div>
+  <div class="gm">${g.sNo||''} · Room ${g.room||''} · ${g.mobile||''} ${g.state?'· '+g.state:''}</div></div>
+  ${g.status==='checked-in'?`<button class="abtn bco" onclick="dco('${g.sNo||g.localId}')">Out</button>`:''}
+  <button class="abtn bdl" onclick="dg('${g.sNo||g.localId}')"><i class="ti ti-trash"></i></button>
   </div>
-  <div class="tinfo">In: ${g.ciDate} ${g.ciTime} ${g.coDate?'· Out: '+g.coDate+' '+g.coTime:''} ${g.instaLink?'· <a href="'+g.instaLink+'" target="_blank" style="color:#C13584">Insta ID</a>':''}</div>
+  <div class="tinfo">
+  <span>In: ${g.ciDate||''} ${g.ciTime||''}</span>
+  ${g.coDate?`<span>· Out: ${g.coDate} ${g.coTime}</span>`:''}
+  ${g.photoUrl&&!g.photoUrl.startsWith('data:')?`<a href="${g.photoUrl}" target="_blank" style="color:#185FA5">📎 ID Photo (Drive)</a>`:''}
+  </div>
   </div>`).join('')||'<p style="text-align:center;color:#999;padding:20px">Koi guest nahi</p>';
 }
-function dco(id){const g=G.find(x=>x.id===id);const n=now();g.status='checked-out';g.coDate=n.date;g.coTime=n.time;localStorage.setItem('gh5',JSON.stringify(G));rg();}
-function dg(id){if(!confirm('Delete?'))return;G=G.filter(x=>x.id!==id);localStorage.setItem('gh5',JSON.stringify(G));rg();}
+
+async function dco(idOrSNo){
+  const g=G.find(x=>(x.sNo||x.localId)===idOrSNo);
+  if(!g)return;
+  const n=now();
+  g.status='checked-out';g.coDate=n.date;g.coTime=n.time;
+  localStorage.setItem('svp_guests',JSON.stringify(G));
+  rg();
+  if(CFG.scriptUrl&&g.sNo){
+    try{
+      await fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:n.date,coTime:n.time})});
+    }catch(e){}
+  }
+}
+
+function dg(idOrSNo){
+  if(!confirm('Delete karein?'))return;
+  G=G.filter(x=>(x.sNo||x.localId)!==idOrSNo);
+  localStorage.setItem('svp_guests',JSON.stringify(G));
+  rg();
+}
+
+loadSettingsUI();
 </script>
