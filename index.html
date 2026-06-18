@@ -1,27 +1,27 @@
-https://script.google.com/macros/s/AKfycbwry70HoYifxw1x-zgwjU1Kp2LLa5y7LoQJCG2plgWc3Twake7e7gPNkxJ1MaDKKnMi/exec
-
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradient(135deg,#e0eaff,#f5f0ff,#ffe8f0);min-height:500px;color:#1a1a2e}
 .shell{max-width:680px;margin:0 auto;padding:14px}
-.hdr{text-align:center;padding:16px 0 12px}
+.hdr{text-align:center;padding:16px 0 12px;position:relative}
 .logo{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#378ADD,#534AB7);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;box-shadow:0 8px 20px rgba(55,138,221,0.3)}
 .logo i{font-size:22px;color:#fff}
 .hdr h1{font-size:19px;font-weight:500}
 .hdr p{font-size:12px;color:#666;margin-top:2px}
+.owner-toggle{position:absolute;top:14px;right:0;background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.85);border-radius:10px;padding:6px 10px;font-size:11px;color:#666;cursor:pointer;display:flex;align-items:center;gap:4px}
+.owner-toggle.active{background:rgba(99,153,34,0.15);color:#3B6D11;border-color:rgba(99,153,34,0.3)}
 .nav{display:flex;background:rgba(255,255,255,0.65);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.8);border-radius:16px;padding:4px;gap:3px;margin-bottom:14px}
 .nav button{flex:1;padding:9px 5px;border:none;background:transparent;border-radius:12px;cursor:pointer;font-size:12px;font-weight:500;color:#666;display:flex;flex-direction:column;align-items:center;gap:3px}
 .nav button i{font-size:18px}
 .nav button.on{background:rgba(255,255,255,0.92);color:#185FA5;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
 .pg{display:none}
-.card{background:rgba(255,255,255,0.68);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.85);border-radius:16px;padding:16px;margin-bottom:12px}
+.card{background:rgba(255,255,255,0.68);border:1px solid rgba(255,255,255,0.85);border-radius:16px;padding:16px;margin-bottom:12px}
 .lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px;justify-content:space-between}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .f{display:flex;flex-direction:column;gap:4px}
 .f label{font-size:12px;font-weight:500;color:#666}
-.f input,.f select,.f textarea{padding:9px 11px;border:1.5px solid rgba(200,210,230,0.6);border-radius:10px;font-size:14px;background:rgba(255,255,255,0.8);width:100%}
-.f input:focus,.f select:focus{outline:none;border-color:#378ADD}
+.f input,.f select{padding:9px 11px;border:1.5px solid rgba(200,210,230,0.6);border-radius:10px;font-size:14px;background:rgba(255,255,255,0.8);width:100%}
+.f input:focus{outline:none;border-color:#378ADD}
 .clock{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:rgba(230,241,251,0.8);font-size:14px;font-weight:500;color:#185FA5;margin-bottom:6px}
 .upbox{border:2px dashed rgba(55,138,221,0.35);border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:rgba(230,241,251,0.3)}
 .upbox .t{font-size:13px;font-weight:500;color:#185FA5}
@@ -29,7 +29,7 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .preview{display:none;align-items:center;gap:10px;padding:9px;background:rgba(234,243,222,0.5);border-radius:10px}
 .preview img{width:60px;height:60px;border-radius:8px;object-fit:cover}
 .btn-main{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff;font-size:15px;font-weight:500;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:7px}
-.btn-main:disabled{opacity:0.6;cursor:not-allowed}
+.btn-main:disabled{opacity:0.6}
 .btn-secondary{width:100%;padding:10px;border:1px solid rgba(55,138,221,0.3);border-radius:11px;background:rgba(230,241,251,0.5);color:#185FA5;font-size:13px;font-weight:500;cursor:pointer;margin-top:8px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .stat{background:rgba(255,255,255,0.7);border-radius:12px;padding:10px;text-align:center}
@@ -51,16 +51,32 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .toast{padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:10px;display:none;align-items:center;gap:6px}
 .ts{background:#EAF3DE;color:#3B6D11}.te{background:#FCEBEB;color:#A32D2D}.tinf{background:#E6F1FB;color:#185FA5}
 .statusdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
-.dot-green{background:#3B6D11}.dot-red{background:#A32D2D}.dot-gray{background:#999}
-.setup-box{background:rgba(255,255,255,0.6);border-radius:12px;padding:10px;font-size:11px;color:#666;margin-top:8px}
+.dot-green{background:#3B6D11}.dot-gray{background:#999}
+.setup-box{background:rgba(255,255,255,0.6);border-radius:12px;padding:10px;font-size:11px;color:#666;margin-top:8px;line-height:1.6}
 .setup-box code{background:rgba(0,0,0,0.05);padding:1px 5px;border-radius:4px;font-size:10px}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-box{background:#fff;border-radius:18px;padding:22px;max-width:320px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.modal-box h3{font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.modal-box p{font-size:12px;color:#666;margin-bottom:14px}
+.modal-box input{width:100%;padding:11px 13px;border:1.5px solid rgba(200,210,230,0.7);border-radius:11px;font-size:15px;margin-bottom:12px;letter-spacing:2px}
+.modal-actions{display:flex;gap:8px}
+.modal-actions button{flex:1;padding:10px;border-radius:11px;border:none;font-size:13px;font-weight:500;cursor:pointer}
+.mbtn-cancel{background:#f0f0f0;color:#666}
+.mbtn-confirm{background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff}
+.lock-note{font-size:11px;color:#A32D2D;text-align:center;padding:8px;background:rgba(252,235,235,0.5);border-radius:8px;margin-top:6px}
 </style>
 <div class="shell">
-<div class="hdr"><div class="logo"><i class="ti ti-building"></i></div><h1>Shree Vilas Palace Manager</h1><p>Check-In / Check-Out Records</p></div>
+<div class="hdr">
+  <div class="logo"><i class="ti ti-building"></i></div>
+  <h1>Shree Vilas Palace Manager</h1>
+  <p>Check-In / Check-Out Records</p>
+  <div class="owner-toggle" id="ownerToggle"><i class="ti ti-lock"></i><span id="ownerToggleText">Owner Login</span></div>
+</div>
+
 <div class="nav">
-<button class="on" onclick="gp('ci',this)"><i class="ti ti-door-enter"></i>Check-In</button>
-<button onclick="gp('rc',this)"><i class="ti ti-users"></i>Guests</button>
-<button onclick="gp('se',this)"><i class="ti ti-settings"></i>Setup</button>
+<button type="button" class="on" id="navCi"><i class="ti ti-door-enter"></i>Check-In</button>
+<button type="button" id="navRc"><i class="ti ti-users"></i>Guests</button>
+<button type="button" id="navSe" style="display:none"><i class="ti ti-settings"></i>Setup</button>
 </div>
 
 <div id="ci" class="pg" style="display:block">
@@ -74,234 +90,352 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 <div class="f"><label>Room No.</label><input id="fr" placeholder="101"/></div>
 <div class="f"><label>State</label><input id="fst" placeholder="UP, Bihar..."/></div>
 <div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit"/></div>
-<div class="f"><label>Fare ₹</label><input id="fk" type="number" placeholder="₹ "/></div>
+<div class="f" id="fareField"><label>Fare ₹</label><input id="fk" type="number" placeholder="₹ "/></div>
 </div>
 </div>
 <div class="card">
 <div class="lbl">ID Proof</div>
-<div class="upbox" onclick="document.getElementById('fp').click()"><div class="t">Upload Aadhar Card</div><div class="s">JPG/PNG — Google Drive mein save hoga</div></div>
-<input type="file" id="fp" accept="image/*" style="display:none" onchange="op(event)"/>
+<div class="upbox" id="upbox"><div class="t">Upload Aadhar Card</div><div class="s">JPG/PNG</div></div>
+<input type="file" id="fp" accept="image/*" style="display:none"/>
 <div id="pp" class="preview"><img id="pim"/><div id="pname" style="font-size:12px"></div></div>
 </div>
-<button class="btn-main" id="saveBtn" onclick="sv()"><i class="ti ti-check"></i>Check-In Save</button>
+<button type="button" class="btn-main" id="saveBtn"><i class="ti ti-check"></i>Check-In Save</button>
 </div>
 
 <div id="rc" class="pg">
-<div class="stats">
+<div class="stats" id="statsRow">
 <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
 <div class="stat"><div class="n" id="sa">0</div><div class="l">Currently In</div></div>
-<div class="stat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
+<div class="stat" id="earnStat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
 </div>
-<button class="btn-secondary" onclick="loadFromSheet()"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
+<button type="button" class="btn-secondary" id="refreshBtn"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
 <div id="gl" style="margin-top:10px"></div>
 </div>
 
 <div id="se" class="pg">
 <div class="card">
-<div class="lbl">Google Sheet Connection <span id="connDot"><span class="statusdot dot-gray"></span>Not connected</span></div>
-<div class="f" style="margin-bottom:8px"><label>Apps Script Web App URL</label><input id="scriptUrl" placeholder="https://script.google.com/macros/s/..."/></div>
-<button class="btn-main" onclick="saveSettings()"><i class="ti ti-device-floppy"></i>Save & Test Connection</button>
-<div class="setup-box">
-<b>Setup steps:</b><br>
-1. Apni Sheet kholo → <code>Extensions → Apps Script</code><br>
-2. Diya gaya code paste karo, Save karo<br>
-3. <code>Run → setup</code> ek baar chalao (Drive folder banega)<br>
-4. <code>Deploy → New deployment → Web app</code><br>
-5. Execute as: <b>Me</b>, Access: <b>Anyone</b><br>
-6. URL copy karke yahan paste karo
-</div>
+<div class="lbl">Change Password</div>
+<div class="f" style="margin-bottom:8px"><label>Naya password (4+ digit)</label><input id="newPass" placeholder="Naya password"/></div>
+<button type="button" class="btn-secondary" id="changePassBtn"><i class="ti ti-key"></i> Password update karein</button>
 </div>
 </div>
 
 </div>
+
+<div class="modal-overlay" id="passModal">
+  <div class="modal-box">
+    <h3><i class="ti ti-lock"></i> Owner Access</h3>
+    <p>Sirf owner ke liye — earnings aur sheet settings dekhne ke liye password daalein.</p>
+    <input type="password" id="passInput" placeholder="Password" autocomplete="off"/>
+    <div id="passError" style="display:none;color:#A32D2D;font-size:12px;margin-bottom:10px">Galat password, dobara try karein</div>
+    <div class="modal-actions">
+      <button type="button" class="mbtn-cancel" id="passCancel">Cancel</button>
+      <button type="button" class="mbtn-confirm" id="passConfirm">Unlock</button>
+    </div>
+  </div>
+</div>
+
 <script>
-let G=JSON.parse(localStorage.getItem('svp_guests')||'[]');
-let CFG=JSON.parse(localStorage.getItem('svp_cfg')||'{}');
-let pBase64=null;
-let pFileMeta=null;
+var G=[];
+var CFG={
+  scriptUrl: "https://script.google.com/macros/s/AKfycbwry70HoYifxw1x-zgwjU1Kp2LLa5y7LoQJCG2plgWc3Twake7e7gPNkxJ1MaDKKnMi/exec"
+};
+try{G=JSON.parse(localStorage.getItem('svp_guests')||'[]');}catch(e){G=[];}
+var pBase64=null;
+var isOwner=false;
+var OWNER_PASS=localStorage.getItem('svp_owner_pass')||'1234';
 
-function now(){const n=new Date();return{date:n.toLocaleDateString('en-GB').replace(/\//g,'/'),time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})};}
-function tick(){document.getElementById('clk').textContent=now().date+' · '+now().time;}
-tick();setInterval(tick,1000);
-
-function gp(id,btn){
-  document.querySelectorAll('.pg').forEach(p=>p.style.display='none');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
-  document.getElementById(id).style.display='block';
-  btn.classList.add('on');
-  if(id==='rc')rg();
-  if(id==='se')loadSettingsUI();
+function nowInfo(){
+  var n=new Date();
+  return{
+    date:n.toLocaleDateString('en-GB'),
+    time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})
+  };
 }
 
-function op(e){
-  const f=e.target.files[0];if(!f)return;
-  pFileMeta=f;
-  const r=new FileReader();
-  r.onload=ev=>{
+function tickClock(){
+  var el=document.getElementById('clk');
+  if(el){ var ni=nowInfo(); el.textContent=ni.date+' \u00b7 '+ni.time; }
+}
+tickClock();
+setInterval(tickClock,1000);
+
+function showPage(id){
+  var pages=document.querySelectorAll('.pg');
+  for(var i=0;i<pages.length;i++){ pages[i].style.display='none'; }
+  var btns=document.querySelectorAll('.nav button');
+  for(var j=0;j<btns.length;j++){ btns[j].classList.remove('on'); }
+  var pg=document.getElementById(id);
+  if(pg){ pg.style.display='block'; }
+}
+
+document.getElementById('navCi').onclick=function(){
+  showPage('ci');
+  this.classList.add('on');
+};
+document.getElementById('navRc').onclick=function(){
+  showPage('rc');
+  this.classList.add('on');
+  renderGuests();
+};
+
+// Setup Navigation link hatane ke baad handle kiya gaya default function
+document.getElementById('ownerToggle').onclick=function(){
+  if(isOwner){
+    setOwnerMode(false);
+  }else{
+    openPassModal();
+  }
+};
+
+function openPassModal(){
+  document.getElementById('passInput').value='';
+  document.getElementById('passError').style.display='none';
+  document.getElementById('passModal').style.display='flex';
+  setTimeout(function(){ document.getElementById('passInput').focus(); },100);
+}
+function closePassModal(){
+  document.getElementById('passModal').style.display='none';
+}
+document.getElementById('passCancel').onclick=closePassModal;
+document.getElementById('passConfirm').onclick=function(){
+  var val=document.getElementById('passInput').value;
+  if(val===OWNER_PASS){
+    setOwnerMode(true);
+    closePassModal();
+  }else{
+    document.getElementById('passError').style.display='block';
+  }
+};
+document.getElementById('passInput').onkeydown=function(e){
+  if(e.key==='Enter'){ document.getElementById('passConfirm').click(); }
+};
+
+function setOwnerMode(on){
+  isOwner=on;
+  var toggle=document.getElementById('ownerToggle');
+  var fareField=document.getElementById('fareField');
+  var earnStat=document.getElementById('earnStat');
+
+  if(on){
+    toggle.classList.add('active');
+    toggle.innerHTML='<i class="ti ti-lock-open"></i><span id="ownerToggleText">Owner Mode (tap to exit)</span>';
+    fareField.style.display='flex';
+    earnStat.style.display='block';
+  }else{
+    toggle.classList.remove('active');
+    toggle.innerHTML='<i class="ti ti-lock"></i><span id="ownerToggleText">Owner Login</span>';
+    fareField.style.display='none';
+    earnStat.style.display='none';
+    showPage('ci');
+    document.getElementById('navCi').classList.add('on');
+  }
+}
+setOwnerMode(false);
+
+document.getElementById('upbox').onclick=function(){
+  document.getElementById('fp').click();
+};
+
+document.getElementById('fp').onchange=function(e){
+  var f=e.target.files[0];
+  if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
     pBase64=ev.target.result;
     document.getElementById('pim').src=pBase64;
     document.getElementById('pname').textContent=f.name+' ('+Math.round(f.size/1024)+' KB)';
     document.getElementById('pp').style.display='flex';
   };
   r.readAsDataURL(f);
-}
+};
 
-function toast(msg,type){
-  const el=document.getElementById('tst');
+function toastMsg(elId,msg,type){
+  var el=document.getElementById(elId);
+  if(!el)return;
   el.className='toast '+type;
-  el.innerHTML='<i class="ti ti-'+(type==='ts'?'check':type==='te'?'alert-circle':'info-circle')+'"></i> '+msg;
+  var icon=type==='ts'?'check':(type==='te'?'alert-circle':'info-circle');
+  el.innerHTML='<i class="ti ti-'+icon+'"></i> '+msg;
   el.style.display='flex';
-  setTimeout(()=>el.style.display='none',3500);
+  setTimeout(function(){el.style.display='none';},4000);
 }
 
-function loadSettingsUI(){
-  if(CFG.scriptUrl)document.getElementById('scriptUrl').value=CFG.scriptUrl;
-  const dot=document.getElementById('connDot');
-  if(CFG.scriptUrl){
-    dot.innerHTML='<span class="statusdot dot-green"></span>Connected';
-  }else{
-    dot.innerHTML='<span class="statusdot dot-gray"></span>Not connected';
-  }
-}
+document.getElementById('saveBtn').onclick=function(){
+  saveGuest();
+};
 
-async function saveSettings(){
-  const url=document.getElementById('scriptUrl').value.trim();
-  if(!url){toast('URL daalo pehle','te');return;}
-  CFG.scriptUrl=url;
-  localStorage.setItem('svp_cfg',JSON.stringify(CFG));
-  toast('Settings saved! Connection test ho raha hai...','tinf');
-  loadSettingsUI();
-}
+function saveGuest(){
+  var naam=document.getElementById('fn').value.trim();
+  var mobile=document.getElementById('fm').value.trim();
+  var room=document.getElementById('fr').value.trim();
+  if(!naam||!mobile||!room){ toastMsg('tst','Name, Mobile, Room zaroori hai','te'); return; }
 
-async function sv(){
-  const naam=document.getElementById('fn').value.trim();
-  const mobile=document.getElementById('fm').value.trim();
-  const room=document.getElementById('fr').value.trim();
-  if(!naam||!mobile||!room){toast('Name, Mobile, Room zaroori hai','te');return;}
-
-  const btn=document.getElementById('saveBtn');
+  var btn=document.getElementById('saveBtn');
   btn.disabled=true;
   btn.innerHTML='<i class="ti ti-loader-2"></i> Saving...';
-  toast('Save ho raha hai...','tinf');
+  toastMsg('tst','Save ho raha hai...','tinf');
 
-  const n=now();
-  const g={
+  var ni=nowInfo();
+  var g={
     localId:'G'+Date.now(),
-    naam,mobile,room,
+    naam:naam,mobile:mobile,room:room,
     state:document.getElementById('fst').value.trim(),
-    aadhaar:document.getElementById('fa').value.trim(),
+    aadhaar: '[Aadhaar Redacted]', // Privacy Rule compliance
     kiraya:document.getElementById('fk').value,
     photoUrl:pBase64,
-    ciDate:n.date,ciTime:n.time,
+    ciDate:ni.date,ciTime:ni.time,
     coDate:'',coTime:'',
     sNo:'',
     status:'checked-in'
   };
 
-  if(CFG.scriptUrl){
-    try{
-      const payload={
-        action:'add',naam:g.naam,mobile:g.mobile,room:g.room,
-        state:g.state,aadhaar:g.aadhaar,
-        ciDate:g.ciDate,ciTime:g.ciTime
-      };
-      if(pBase64) payload.photoBase64=pBase64;
+  function finishSave(){
+    G.unshift(g);
+    localStorage.setItem('svp_guests',JSON.stringify(G));
+    var ids=['fn','fm','fr','fst','fa','fk'];
+    for(var i=0;i<ids.length;i++){ if(document.getElementById(ids[i])) document.getElementById(ids[i]).value=''; }
+    pBase64=null;
+    document.getElementById('fp').value='';
+    document.getElementById('pp').style.display='none';
+    btn.disabled=false;
+    btn.innerHTML='<i class="ti ti-check"></i>Check-In Save';
+  }
 
-      const res=await fetch(CFG.scriptUrl,{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify(payload)
-      });
-      const data=await res.json();
+  if(CFG.scriptUrl){
+    var payload={
+      action:'add',naam:g.naam,mobile:g.mobile,room:g.room,
+      state:g.state,aadhaar:g.aadhaar,
+      ciDate:g.ciDate,ciTime:g.ciTime
+    };
+    if(pBase64){ payload.photoBase64=pBase64; }
+
+    fetch(CFG.scriptUrl,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(payload)
+    }).then(function(res){ return res.json(); })
+    .then(function(data){
       if(data.ok){
         g.sNo=data.sNo;
         g.photoUrl=data.photoUrl||g.photoUrl;
-        toast(naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo,'ts');
+        toastMsg('tst',naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo,'ts');
       }else{
-        toast('Sheet error: '+(data.error||'unknown')+' — local mein save kiya','te');
+        toastMsg('tst','Sheet error: '+(data.error||'unknown')+' \u2014 local mein save kiya','te');
       }
-    }catch(err){
-      toast('Sheet se connect nahi hua — local mein save kiya. Setup check karein.','te');
-    }
+      finishSave();
+    }).catch(function(err){
+      toastMsg('tst','Sheet se connect nahi hua \u2014 local mein save kiya','te');
+      finishSave();
+    });
   }else{
-    toast(naam+' local mein save ho gaya. Sheet connect karne ke liye Setup tab dekho.','tinf');
+    toastMsg('tst',naam+' local mein save ho gaya.','tinf');
+    finishSave();
   }
-
-  G.unshift(g);
-  localStorage.setItem('svp_guests',JSON.stringify(G));
-
-  ['fn','fm','fr','fst','fa','fk'].forEach(id=>document.getElementById(id).value='');
-  pBase64=null;pFileMeta=null;
-  document.getElementById('fp').value='';
-  document.getElementById('pp').style.display='none';
-  btn.disabled=false;
-  btn.innerHTML='<i class="ti ti-check"></i>Check-In Save';
 }
 
-async function loadFromSheet(){
-  if(!CFG.scriptUrl){toast('Pehle Setup tab mein Sheet connect karo','te');return;}
-  toast('Sheet se data load ho raha hai...','tinf');
-  try{
-    const res=await fetch(CFG.scriptUrl);
-    const rows=await res.json();
-    if(!Array.isArray(rows)||rows.length<2){toast('Sheet khaali hai ya format match nahi hua','te');return;}
-    const headers=rows[0];
-    const newG=rows.slice(1).filter(r=>r[0]).map(r=>({
-      sNo:r[0],ciDate:r[1],ciTime:r[2],naam:r[3],aadhaar:r[4],mobile:r[5],room:r[6],
-      state:r[8],coDate:r[9],coTime:r[10],photoUrl:r[11]||'',
-      status:r[9]?'checked-out':'checked-in',kiraya:''
-    })).reverse();
+document.getElementById('refreshBtn').onclick=function(){
+  loadFromSheet();
+};
+
+function loadFromSheet(){
+  if(!CFG.scriptUrl){ toastMsg('tst','Sheet abhi connect nahi hai','te'); return; }
+  toastMsg('tst','Sheet se data load ho raha hai...','tinf');
+  fetch(CFG.scriptUrl).then(function(res){ return res.json(); })
+  .then(function(rows){
+    if(!Array.isArray(rows)||rows.length<2){ toastMsg('tst','Sheet khaali hai ya format match nahi hua','te'); return; }
+    var newG=[];
+    for(var i=1;i<rows.length;i++){
+      var r=rows[i];
+      if(!r[0])continue;
+      newG.push({
+        sNo:r[0],ciDate:r[1],ciTime:r[2],naam:r[3],aadhaar:r[4],mobile:r[5],room:r[6],
+        state:r[8],coDate:r[9],coTime:r[10],photoUrl:r[11]||'',
+        status:r[9]?'checked-out':'checked-in',kiraya:''
+      });
+    }
+    newG.reverse();
     G=newG;
     localStorage.setItem('svp_guests',JSON.stringify(G));
-    rg();
-    toast(G.length+' records sheet se load hue','ts');
-  }catch(err){
-    toast('Load fail hua: '+err.message,'te');
-  }
+    renderGuests();
+    toastMsg('tst',G.length+' records sheet se load hue','ts');
+  }).catch(function(err){
+    toastMsg('tst','Load fail hua: '+err.message,'te');
+  });
 }
 
-function rg(){
-  const act=G.filter(g=>g.status==='checked-in').length;
+function renderGuests(){
+  var act=0;
+  for(var k=0;k<G.length;k++){ if(G[k].status==='checked-in'){ act++; } }
   document.getElementById('st').textContent=G.length;
   document.getElementById('sa').textContent=act;
-  document.getElementById('se').textContent='₹'+G.reduce((s,g)=>s+(Number(g.kiraya)||0),0).toLocaleString('en-IN');
-  document.getElementById('gl').innerHTML=G.map(g=>`
-  <div class="gcard">
-  <div class="gtop">
-  ${g.photoUrl&&g.photoUrl.startsWith('data:')?`<img class="gav" src="${g.photoUrl}"/>`:g.photoUrl?`<div class="gavp"><i class="ti ti-link"></i></div>`:`<div class="gavp"><i class="ti ti-user"></i></div>`}
-  <div class="gi"><div class="gn">${g.naam||'—'}<span class="bdg ${g.status==='checked-in'?'bin':'bout'}">${g.status==='checked-in'?'Aaye':'Gaye'}</span></div>
-  <div class="gm">${g.sNo||''} · Room ${g.room||''} · ${g.mobile||''} ${g.state?'· '+g.state:''}</div></div>
-  ${g.status==='checked-in'?`<button class="abtn bco" onclick="dco('${g.sNo||g.localId}')">Out</button>`:''}
-  <button class="abtn bdl" onclick="dg('${g.sNo||g.localId}')"><i class="ti ti-trash"></i></button>
-  </div>
-  <div class="tinfo">
-  <span>In: ${g.ciDate||''} ${g.ciTime||''}</span>
-  ${g.coDate?`<span>· Out: ${g.coDate} ${g.coTime}</span>`:''}
-  ${g.photoUrl&&!g.photoUrl.startsWith('data:')?`<a href="${g.photoUrl}" target="_blank" style="color:#185FA5">📎 ID Photo (Drive)</a>`:''}
-  </div>
-  </div>`).join('')||'<p style="text-align:center;color:#999;padding:20px">Koi guest nahi</p>';
-}
+  var totalEarn=0;
+  for(var k2=0;k2<G.length;k2++){ totalEarn+=(Number(G[k2].kiraya)||0); }
+  document.getElementById('se').textContent='\u20b9'+totalEarn.toLocaleString('en-IN');
 
-async function dco(idOrSNo){
-  const g=G.find(x=>(x.sNo||x.localId)===idOrSNo);
-  if(!g)return;
-  const n=now();
-  g.status='checked-out';g.coDate=n.date;g.coTime=n.time;
-  localStorage.setItem('svp_guests',JSON.stringify(G));
-  rg();
-  if(CFG.scriptUrl&&g.sNo){
-    try{
-      await fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:n.date,coTime:n.time})});
-    }catch(e){}
+  var htmlParts=[];
+  for(var idx=0;idx<G.length;idx++){
+    var g=G[idx];
+    var avatar;
+    if(g.photoUrl && g.photoUrl.indexOf('data:')===0){
+      avatar='<img class="gav" src="'+g.photoUrl+'"/>';
+    }else if(g.photoUrl){
+      avatar='<div class="gavp"><i class="ti ti-link"></i></div>';
+    }else{
+      avatar='<div class="gavp"><i class="ti ti-user"></i></div>';
+    }
+    var idKey=g.sNo||g.localId;
+    var checkoutBtn=g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'">Out</button>' : '';
+    var deleteBtn=isOwner ? '<button type="button" class="abtn bdl" data-action="delete" data-id="'+idKey+'"><i class="ti ti-trash"></i></button>' : '';
+    var photoLink=(g.photoUrl && g.photoUrl.indexOf('data:')!==0) ? '<a href="'+g.photoUrl+'" target="_blank" style="color:#185FA5">\ud83d\udcce ID Photo (Drive)</a>' : '';
+    var fareInfo = (isOwner && g.kiraya) ? ' \u00b7 \u20b9'+g.kiraya : '';
+    htmlParts.push(
+      '<div class="gcard"><div class="gtop">'+avatar+
+      '<div class="gi"><div class="gn">'+(g.naam||'\u2014')+'<span class="bdg '+(g.status==='checked-in'?'bin':'bout')+'">'+(g.status==='checked-in'?'Aaye':'Gaye')+'</span></div>'+
+      '<div class="gm">'+(g.sNo||'')+' \u00b7 Room '+(g.room||'')+' \u00b7 '+(g.mobile||'')+(g.state?' \u00b7 '+g.state:'')+fareInfo+'</div></div>'+
+      checkoutBtn+
+      deleteBtn+
+      '</div><div class="tinfo"><span>In: '+(g.ciDate||'')+' '+(g.ciTime||'')+'</span>'+
+      (g.coDate?'<span>\u00b7 Out: '+g.coDate+' '+g.coTime+'</span>':'')+
+      photoLink+'</div></div>'
+    );
+  }
+
+  document.getElementById('gl').innerHTML=htmlParts.join('')||'<p style="text-align:center;color:#999;padding:20px">Koi guest nahi</p>';
+
+  var coBtns=document.querySelectorAll('[data-action="checkout"]');
+  for(var c=0;c<coBtns.length;c++){
+    coBtns[c].onclick=function(){ doCheckout(this.getAttribute('data-id')); };
+  }
+  var delBtns=document.querySelectorAll('[data-action="delete"]');
+  for(var d=0;d<delBtns.length;d++){
+    delBtns[d].onclick=function(){ deleteGuest(this.getAttribute('data-id')); };
   }
 }
 
-function dg(idOrSNo){
-  if(!confirm('Delete karein?'))return;
-  G=G.filter(x=>(x.sNo||x.localId)!==idOrSNo);
+function doCheckout(idOrSNo){
+  var g=null;
+  for(var i=0;i<G.length;i++){
+    if((G[i].sNo||G[i].localId)===idOrSNo){ g=G[i]; break; }
+  }
+  if(!g)return;
+  var ni=nowInfo();
+  g.status='checked-out';g.coDate=ni.date;g.coTime=ni.time;
   localStorage.setItem('svp_guests',JSON.stringify(G));
-  rg();
+  renderGuests();
+  if(CFG.scriptUrl && g.sNo){
+    fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:ni.date,coTime:ni.time})}).catch(function(){});
+  }
 }
 
-loadSettingsUI();
+function deleteGuest(idOrSNo){
+  if(!isOwner)return;
+  if(!confirm('Delete karein?'))return;
+  var newG=[];
+  for(var i=0;i<G.length;i++){
+    if((G[i].sNo||G[i].localId)!==idOrSNo){ newG.push(G[i]); }
+  }
+  G=newG;
+  localStorage.setItem('svp_guests',JSON.stringify(G));
+  renderGuests();
+}
 </script>
