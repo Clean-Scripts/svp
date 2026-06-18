@@ -64,6 +64,22 @@ body{font-family:var(--font-sans,system-ui,sans-serif);background:linear-gradien
 .mbtn-cancel{background:#f0f0f0;color:#666}
 .mbtn-confirm{background:linear-gradient(135deg,#378ADD,#534AB7);color:#fff}
 .lock-note{font-size:11px;color:#A32D2D;text-align:center;padding:8px;background:rgba(252,235,235,0.5);border-radius:8px;margin-top:6px}
+/* QR Code Auto Height/Width for Mobile Screen */
+.footer {width: 100%;display: flex;justify-content: center;align-items: center;padding: 12px 0 4px;margin-top: 12px;}
+.qr-code-section {width: 100%;max-width: 200px;display: flex;justify-content: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.qr-code {
+  width: 100%;
+  height: auto; /* Auto height-width ratio scale karega */
+  display: block;
+  border-radius: 8px;
+  object-fit: contain;
+}
 </style>
 <div class="shell">
 <div class="hdr">
