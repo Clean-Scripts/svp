@@ -687,10 +687,22 @@ function loadFromSheet(){
     for(var i=1;i<rows.length;i++){
       var r=rows[i];
       if(!r[0])continue;
+      
       newG.push({
-        sNo:r[0],ciDate:r[1],ciTime:r[2],naam:r[3],aadhaar:r[4],mobile:r[5],room:r[6],
-        state:r[8],coDate:r[9],coTime:r[10],photoUrl:r[11]||'',photoUrlBack:r[12]||'',
-        status:r[9]?'checked-out':'checked-in',kiraya:''
+        sNo: r[0],
+        ciDate: r[1],
+        ciTime: r[2],
+        naam: r[3],
+        aadhaar: r[4],
+        mobile: r[5],
+        room: r[6],
+        state: r[8], 
+        coDate: r[9],
+        coTime: r[10],
+        photoUrl: r[11] || '',
+        photoUrlBack: r[12] || '', 
+        status: r[9] ? 'checked-out' : 'checked-in',
+        kiraya: ''
       });
     }
     newG.reverse();
