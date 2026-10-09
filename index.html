@@ -406,7 +406,7 @@
 <button type="button" class="btn-main" id="saveBtn"><i class="ti ti-check"></i>Check-In Save</button>
   <div class="footer">
     <div class="qr-code-section">
-      <img src="https://github.com/Clean-Scripts/svp/blob/main/SVPpay.png?raw=true" alt="Payment Code" class="qr-code" crossorigin="anonymous">
+      <img src="https://github.com/Clean-Scripts/svp/blob/main/SVPpay.png" alt="Payment Code" class="qr-code" crossorigin="anonymous">
     </div>
   </div>
 </div>
@@ -429,19 +429,6 @@
 </div>
 </div>
 
-</div>
-
-<div class="modal-overlay" id="passModal">
-  <div class="modal-box">
-    <h3><i class="ti ti-lock"></i> Owner Access</h3>
-    <p>Sirf owner ke liye — earnings aur sheet settings dekhne ke liye password daalein.</p>
-    <input type="password" id="passInput" placeholder="Password" autocomplete="off"/>
-    <div id="passError" style="display:none;color:#A32D2D;font-size:12px;margin-bottom:10px">Galat password, dobara try karein</div>
-    <div class="modal-actions">
-      <button type="button" class="mbtn-cancel" id="passCancel">Cancel</button>
-      <button type="button" class="mbtn-confirm" id="passConfirm">Unlock</button>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -520,27 +507,7 @@ document.getElementById('passInput').onkeydown=function(e){
   if(e.key==='Enter'){ document.getElementById('passConfirm').click(); }
 };
 
-function setOwnerMode(on){
-  isOwner=on;
-  var toggle=document.getElementById('ownerToggle');
-  var fareField=document.getElementById('fareField');
-  var earnStat=document.getElementById('earnStat');
 
-  if(on){
-    toggle.classList.add('active');
-    toggle.innerHTML='<i class="ti ti-lock-open"></i><span id="ownerToggleText">Owner Mode (tap to exit)</span>';
-    fareField.style.display='flex';
-    earnStat.style.display='block';
-  }else{
-    toggle.classList.remove('active');
-    toggle.innerHTML='<i class="ti ti-lock"></i><span id="ownerToggleText">Owner Login</span>';
-    fareField.style.display='none';
-    earnStat.style.display='none';
-    showPage('ci');
-    document.getElementById('navCi').classList.add('on');
-  }
-}
-setOwnerMode(false);
 
 // Upload handlers for Front and Back side
 document.getElementById('upboxFront').onclick=function(){
