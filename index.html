@@ -1,277 +1,360 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="https://nishu-coder.github.io/vilas-palace/Logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
-    <style>
-    /* Global Auto-Scaling & Layout Fixes */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+  <style>
+    /* Global Auto-Scaling & Liquid Glass Theme */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans, system-ui, -apple-system, sans-serif); }
+
     body {
-      font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
-      background: linear-gradient(135deg, #e0eaff, #f5f0ff, #ffe8f0);
+      background: radial-gradient(circle at 10% 20%, rgba(196, 219, 254, 0.6) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(245, 208, 254, 0.6) 0%, transparent 40%),
+                  radial-gradient(circle at 50% 50%, rgba(254, 226, 226, 0.5) 0%, transparent 60%),
+                  linear-gradient(135deg, #e2e8f0, #f8fafc);
       min-height: 100vh;
-      color: #1a1a2e;
+      color: #0f172a;
       line-height: 1.4;
       padding-bottom: env(safe-area-inset-bottom);
     }
-  
+
     .shell {
       width: 100%;
       max-width: 680px;
       margin: 0 auto;
-      padding: clamp(10px, 3.5vw, 20px);
+      padding: clamp(12px, 4vw, 24px);
     }
-  
+
     .hdr {
       text-align: center;
-      padding: 16px 0 12px;
+      padding: 18px 0 14px;
       position: relative;
     }
-  
+
     .logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #378ADD, #534AB7);
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 8px;
-      box-shadow: 0 8px 20px rgba(55, 138, 221, 0.3);
+      margin: 0 auto 10px;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35);
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.6);
     }
     .logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .hdr h1 { font-size: clamp(18px, 5vw, 22px); font-weight: 500; }
-    .hdr p { font-size: 12px; color: #666; margin-top: 2px; }
-  
+    .hdr h1 { font-size: clamp(20px, 5vw, 24px); font-weight: 600; letter-spacing: -0.5px; color: #1e293b; }
+    .hdr p { font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 400; }
+
+    /* Liquid Glass Navigation */
     .nav {
       display: flex;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 16px;
-      padding: 4px;
-      gap: 4px;
-      margin-bottom: 14px;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 20px;
+      padding: 6px;
+      gap: 6px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
     }
     .nav button {
       flex: 1;
-      padding: 10px 5px;
+      padding: 12px 8px;
       border: none;
       background: transparent;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      color: #666;
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
-      transition: all 0.2s ease;
+      gap: 4px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       -webkit-tap-highlight-color: transparent;
     }
-    .nav button i { font-size: 18px; }
+    .nav button i { font-size: 20px; }
     .nav button.on {
-      background: rgba(255, 255, 255, 0.92);
-      color: #185FA5;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.95);
+      color: #2563eb;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.9);
     }
-  
-    .pg { display: none; width: 100%; }
-  
+
+    .pg { display: none; width: 100%; animation: fadeInPg 0.3s ease; }
+    @keyframes fadeInPg { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Liquid Glass Cards */
     .card {
-      background: rgba(255, 255, 255, 0.68);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 16px;
-      padding: clamp(12px, 4vw, 18px);
-      margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 20px;
+      padding: clamp(14px, 4vw, 20px);
+      margin-bottom: 14px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
     }
-  
+
     .lbl {
       font-size: 11px;
-      font-weight: 600;
-      color: #999;
+      font-weight: 700;
+      color: #64748b;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
       justify-content: space-between;
     }
-  
+
     .row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 10px;
-      margin-bottom: 8px;
+      gap: 12px;
+      margin-bottom: 4px;
     }
-  
-    .f { display: flex; flex-direction: column; gap: 4px; }
-    .f label { font-size: 12px; font-weight: 500; color: #666; }
+
+    .f { display: flex; flex-direction: column; gap: 5px; }
+    .f label { font-size: 12px; font-weight: 600; color: #475569; }
     .f input, .f select {
-      padding: 11px 13px;
-      border: 1.5px solid rgba(200, 210, 230, 0.6);
-      border-radius: 10px;
+      padding: 13px 14px;
+      border: 1px solid rgba(203, 213, 225, 0.7);
+      border-radius: 12px;
       font-size: 15px;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.75);
+      color: #0f172a;
       width: 100%;
       appearance: none;
       -webkit-appearance: none;
+      transition: all 0.2s ease;
     }
-    .f input:focus { outline: none; border-color: #378ADD; background: #fff; }
-  
+    .f input:focus, .f select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
     .clock {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 10px;
-      background: rgba(230, 241, 251, 0.8);
-      font-size: 14px;
-      font-weight: 500;
-      color: #185FA5;
-      margin-bottom: 2px;
-    }
-  
-    .upbox {
-      border: 2px dashed rgba(55, 138, 221, 0.35);
+      gap: 8px;
+      padding: 10px 16px;
       border-radius: 12px;
-      padding: 22px 14px;
+      background: rgba(239, 246, 255, 0.8);
+      border: 1px solid rgba(191, 219, 254, 0.6);
+      font-size: 15px;
+      font-weight: 600;
+      color: #1d4ed8;
+    }
+
+    .upbox {
+      border: 2px dashed rgba(59, 130, 246, 0.35);
+      border-radius: 14px;
+      padding: 24px 14px;
       text-align: center;
       cursor: pointer;
-      background: rgba(230, 241, 251, 0.3);
+      background: rgba(239, 246, 255, 0.4);
+      transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .upbox .t { font-size: 14px; font-weight: 500; color: #185FA5; }
-    .upbox .s { font-size: 11px; color: #888; margin-top: 3px; }
-  
+    .upbox:active { background: rgba(239, 246, 255, 0.7); }
+    .upbox .t { font-size: 14px; font-weight: 600; color: #1d4ed8; }
+    .upbox .s { font-size: 12px; color: #64748b; margin-top: 4px; }
+
     .preview {
       display: none;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 10px;
-      background: rgba(234, 243, 222, 0.5);
-      border-radius: 10px;
-      margin-top: 8px;
+      background: rgba(240, 253, 244, 0.7);
+      border: 1px solid rgba(187, 247, 208, 0.6);
+      border-radius: 12px;
+      margin-top: 10px;
     }
-    .preview img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
-  
+    .preview img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; }
+
+    /* Action Buttons */
     .btn-main {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       border: none;
-      border-radius: 13px;
-      background: linear-gradient(135deg, #378ADD, #534AB7);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
       color: #fff;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 4px;
+      margin-top: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      box-shadow: 0 4px 12px rgba(83, 74, 183, 0.2);
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      transition: transform 0.1s ease, opacity 0.2s;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-main:disabled { opacity: 0.6; }
-    
+    .btn-main:active { transform: scale(0.98); }
+    .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+
     .btn-secondary {
       width: 100%;
-      padding: 12px;
-      border: 1px solid rgba(55, 138, 221, 0.3);
-      border-radius: 11px;
-      background: rgba(230, 241, 251, 0.5);
-      color: #185FA5;
-      font-size: 14px;
-      font-weight: 500;
+      padding: 14px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 14px;
+      background: rgba(239, 246, 255, 0.6);
+      backdrop-filter: blur(10px);
+      color: #1d4ed8;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
       -webkit-tap-highlight-color: transparent;
     }
-  
+
+    /* Stats Grid */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-    .stat { background: rgba(255, 255, 255, 0.7); border-radius: 12px; padding: 12px 6px; text-align: center; }
-    .stat .n { font-size: clamp(16px, 4.5vw, 20px); font-weight: 600; }
-    .stat .l { font-size: 10px; color: #888; text-transform: uppercase; margin-top: 2px; }
-  
-    .gcard { background: rgba(255, 255, 255, 0.72); border-radius: 14px; padding: 12px; margin-bottom: 8px; }
-    .gtop { display: flex; align-items: center; gap: 10px; }
-    .gav { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; }
-    .gavp { width: 44px; height: 44px; border-radius: 10px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; color: #185FA5; }
+    .stat {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .stat .n { font-size: clamp(18px, 5vw, 22px); font-weight: 700; color: #0f172a; }
+    .stat .l { font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-top: 3px; letter-spacing: 0.5px; }
+
+    /* Guest Item Card Layout */
+    .gcard {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+    .gtop { display: flex; align-items: flex-start; gap: 12px; }
+    .gav { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 1px solid rgba(255,255,255,0.8); }
+    .gavp { width: 50px; height: 50px; border-radius: 12px; background: rgba(239, 246, 255, 0.9); display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 20px; border: 1px solid rgba(191, 219, 254, 0.6); }
     .gi { flex: 1; min-width: 0; font-size: 13px; }
-    .gn { font-weight: 500; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
-    .gm { font-size: 12px; color: #666; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .bdg { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
-    .bin { background: #EAF3DE; color: #3B6D11; }
-    .bout { background: #FCEBEB; color: #A32D2D; }
-    
+    .gn { font-weight: 600; font-size: 15px; color: #0f172a; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .gm { font-size: 13px; color: #475569; margin-top: 3px; }
+    .bdg { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 700; letter-spacing: 0.3px; }
+    .bin { background: #dcfce7; color: #166534; }
+    .bout { background: #fee2e2; color: #991b1b; }
+
     .tinfo {
-      margin-top: 8px;
-      padding: 6px 10px;
-      background: rgba(250, 238, 218, 0.45);
-      border-radius: 7px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: rgba(254, 243, 199, 0.5);
+      border: 1px solid rgba(253, 230, 138, 0.6);
+      border-radius: 10px;
       font-size: 11px;
-      color: #633806;
+      color: #92400e;
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
+      font-weight: 500;
     }
-  
-    .abtn { padding: 6px 10px; border-radius: 8px; font-size: 12px; border: none; cursor: pointer; font-weight: 500; -webkit-tap-highlight-color: transparent; }
-    .bco { background: #FAEEDA; color: #633806; }
-  
-    .toast { padding: 12px 14px; border-radius: 11px; font-size: 14px; margin-bottom: 10px; display: none; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-    .ts { background: #EAF3DE; color: #3B6D11; }
-    .te { background: #FCEBEB; color: #A32D2D; }
-    .tinf { background: #E6F1FB; color: #185FA5; }
-  
+
+    /* Huge Mobile-Friendly Checkout Button */
+    .abtn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.1s ease;
+    }
+    .abtn:active { transform: scale(0.98); }
+    .bco {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #78350f;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Toasts */
+    .toast {
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      backdrop-filter: blur(10px);
+    }
+    .ts { background: rgba(220, 252, 231, 0.9); color: #166534; border: 1px solid rgba(187, 247, 208, 0.8); }
+    .te { background: rgba(254, 226, 226, 0.9); color: #991b1b; border: 1px solid rgba(254, 202, 202, 0.8); }
+    .tinf { background: rgba(239, 246, 255, 0.9); color: #1e40af; border: 1px solid rgba(191, 219, 254, 0.8); }
+
     /* Footer & Liquid Glass QR Toggle Styles */
     .footer {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      padding: 12px 0 4px;
-      margin-top: 12px;
+      gap: 12px;
+      padding: 16px 0 6px;
+      margin-top: 16px;
     }
 
     .glass-qr-toggle {
       display: flex;
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 30px;
-      padding: 4px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      gap: 4px;
+      padding: 5px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+      gap: 6px;
     }
 
     .qr-toggle-btn {
-      padding: 6px 14px;
+      padding: 8px 16px;
       border: none;
       background: transparent;
       border-radius: 20px;
       font-size: 11px;
-      font-weight: 600;
-      color: #666;
+      font-weight: 700;
+      color: #64748b;
       cursor: pointer;
       transition: all 0.3s ease;
       -webkit-tap-highlight-color: transparent;
@@ -279,8 +362,8 @@
 
     .qr-toggle-btn.active {
       background: rgba(255, 255, 255, 0.95);
-      color: #185FA5;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: #2563eb;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .qr-code-container {
@@ -291,13 +374,15 @@
 
     .qr-code-section {
       width: 100%;
-      max-width: 180px;
+      max-width: 190px;
       display: none;
       justify-content: center;
-      padding: 8px;
+      padding: 10px;
       background: rgba(255, 255, 255, 0.85);
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
       animation: fadeIn 0.3s ease-in-out;
     }
 
@@ -309,7 +394,7 @@
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 8px;
+      border-radius: 10px;
       object-fit: contain;
     }
 
@@ -321,117 +406,117 @@
 </head>
 <body>
 <div class="shell">
-<div class="hdr">
-  <div class="logo"><img src="https://nishu-coder.github.io/vilas-palace/Logo.png"></div>
-  <h1>Shree Vilas Palace Manager</h1>
-  <p>Check-In / Check-Out Records</p>
-</div>
+  <div class="hdr">
+    <div class="logo"><img src="https://nishu-coder.github.io/vilas-palace/Logo.png" alt="Logo"></div>
+    <h1>Shree Vilas Palace Manager</h1>
+    <p>Check-In / Check-Out Records</p>
+  </div>
 
-<div class="nav">
-<button type="button" class="on" id="navCi"><i class="ti ti-door-enter"></i>Check-In</button>
-<button type="button" id="navRc"><i class="ti ti-users"></i>Guests</button>
-</div>
+  <div class="nav">
+    <button type="button" class="on" id="navCi"><i class="ti ti-door-enter"></i>Check-In</button>
+    <button type="button" id="navRc"><i class="ti ti-users"></i>Guests</button>
+  </div>
 
-<div id="ci" class="pg" style="display:block">
-<div id="tst" class="toast"></div>
-<div class="card"><div class="lbl">Current Time & Date</div><div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div></div>
-<div class="card">
-<div class="lbl">Guest Details</div>
-<div class="row">
-<div class="f"><label>Name</label><input id="fn" placeholder="Name"/></div>
-<div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="+91 "/></div>
-<div class="f"><label>Room No.</label><input id="fr" placeholder="101"/></div>
-<div class="f"><label>State</label>
-  <select id="fst">
-    <option value="">Select State</option>
-    <option value="Andhra Pradesh">Andhra Pradesh</option>
-    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-    <option value="Assam">Assam</option>
-    <option value="Bihar">Bihar</option>
-    <option value="Chhattisgarh">Chhattisgarh</option>
-    <option value="Goa">Goa</option>
-    <option value="Gujarat">Gujarat</option>
-    <option value="Haryana">Haryana</option>
-    <option value="Himachal Pradesh">Himachal Pradesh</option>
-    <option value="Jharkhand">Jharkhand</option>
-    <option value="Karnataka">Karnataka</option>
-    <option value="Kerala">Kerala</option>
-    <option value="Madhya Pradesh">Madhya Pradesh</option>
-    <option value="Maharashtra">Maharashtra</option>
-    <option value="Manipur">Manipur</option>
-    <option value="Meghalaya">Meghalaya</option>
-    <option value="Mizoram">Mizoram</option>
-    <option value="Nagaland">Nagaland</option>
-    <option value="Odisha">Odisha</option>
-    <option value="Punjab">Punjab</option>
-    <option value="Rajasthan">Rajasthan</option>
-    <option value="Sikkim">Sikkim</option>
-    <option value="Tamil Nadu">Tamil Nadu</option>
-    <option value="Telangana">Telangana</option>
-    <option value="Tripura">Tripura</option>
-    <option value="Uttar Pradesh">Uttar Pradesh</option>
-    <option value="Uttarakhand">Uttarakhand</option>
-    <option value="West Bengal">West Bengal</option>
-    <option value="Andaman & Nicobar">Andaman & Nicobar Islands</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman & Diu</option>
-    <option value="Delhi">Delhi (NCT)</option>
-    <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-    <option value="Ladakh">Ladakh</option>
-    <option value="Lakshadweep">Lakshadweep</option>
-    <option value="Puducherry">Puducherry</option>
-  </select>
-</div>
-<div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit"/></div>
-</div>
-</div>
-<div class="card">
-  <div class="lbl">ID Proof (Aadhaar Card)</div>
-  <div class="row">
-    <div class="f">
-      <div class="upbox" id="upboxFront"><div class="t">Aadhaar Front Capture / Upload</div><div class="s">Camera or Gallery</div></div>
-      <input type="file" id="fpFront" accept="image/*" capture="environment" style="display:none"/>
-      <div id="ppFront" class="preview" style="margin-top: 8px;"><img id="pimFront"/><div id="pnameFront" style="font-size:11px"></div></div>
+  <div id="ci" class="pg" style="display:block">
+    <div id="tst" class="toast"></div>
+    <div class="card">
+      <div class="lbl">Current Time & Date</div>
+      <div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Guest Details</div>
+      <div class="row">
+        <div class="f"><label>Name</label><input id="fn" placeholder="Name"/></div>
+        <div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="+91 "/></div>
+        <div class="f"><label>Room No.</label><input id="fr" placeholder="101"/></div>
+        <div class="f"><label>State</label>
+          <select id="fst">
+            <option value="">Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Andaman & Nicobar">Andaman & Nicobar Islands</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman & Diu</option>
+            <option value="Delhi">Delhi (NCT)</option>
+            <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+            <option value="Ladakh">Ladakh</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Puducherry">Puducherry</option>
+          </select>
+        </div>
+        <div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit"/></div>
+      </div>
     </div>
     
-    <div class="f">
-      <div class="upbox" id="upboxBack"><div class="t">Aadhaar Back Capture / Upload</div><div class="s">Camera or Gallery</div></div>
-      <input type="file" id="fpBack" accept="image/*" capture="environment" style="display:none"/>
-      <div id="ppBack" class="preview" style="margin-top: 8px;"><img id="pimBack"/><div id="pnameBack" style="font-size:11px"></div></div>
-    </div>
-  </div>
-</div>
-<button type="button" class="btn-main" id="saveBtn"><i class="ti ti-check"></i>Check-In Save</button>
-  
-  <div class="footer">
-    <!-- Liquid Glass Toggle Button -->
-    <div class="glass-qr-toggle">
-      <button type="button" class="qr-toggle-btn active" id="btnQrSvp">SHREE VILAS PALACE</button>
-      <button type="button" class="qr-toggle-btn" id="btnQrSandeep">SANDEEP JAISWAL</button>
-    </div>
-
-    <!-- QR Code Display Area -->
-    <div class="qr-code-container">
-      <div class="qr-code-section active" id="qrSecSvp">
-        <img src="https://raw.githubusercontent.com/Clean-Scripts/svp/main/SVPpay.png" alt="Shree Vilas Palace QR" class="qr-code" crossorigin="anonymous">
-      </div>
-      <div class="qr-code-section" id="qrSecSandeep">
-        <img src="https://raw.githubusercontent.com/Clean-Scripts/svp/main/Sandeep.jpg" alt="Sandeep Jaiswal QR" class="qr-code" crossorigin="anonymous">
+    <div class="card">
+      <div class="lbl">ID Proof (Aadhaar Card)</div>
+      <div class="row">
+        <div class="f">
+          <div class="upbox" id="upboxFront"><div class="t">Aadhaar Front Capture</div><div class="s">Camera or Gallery</div></div>
+          <input type="file" id="fpFront" accept="image/*" capture="environment" style="display:none"/>
+          <div id="ppFront" class="preview"><img id="pimFront" alt="Front Preview"/><div id="pnameFront" style="font-size:11px; color:#166534; font-weight:600;"></div></div>
+        </div>
+        <div class="f">
+          <div class="upbox" id="upboxBack"><div class="t">Aadhaar Back Capture</div><div class="s">Camera or Gallery</div></div>
+          <input type="file" id="fpBack" accept="image/*" capture="environment" style="display:none"/>
+          <div id="ppBack" class="preview"><img id="pimBack" alt="Back Preview"/><div id="pnameBack" style="font-size:11px; color:#166534; font-weight:600;"></div></div>
+        </div>
       </div>
     </div>
+    
+    <button type="button" class="btn-main" id="saveBtn"><i class="ti ti-check"></i>Check-In Save</button>
+
+    <div class="footer">
+      <div class="glass-qr-toggle">
+        <button type="button" class="qr-toggle-btn active" id="btnQrSvp">SHREE VILAS PALACE</button>
+        <button type="button" class="qr-toggle-btn" id="btnQrSandeep">SANDEEP JAISWAL</button>
+      </div>
+      <div class="qr-code-container">
+        <div class="qr-code-section active" id="qrSecSvp">
+          <img src="https://raw.githubusercontent.com/Clean-Scripts/svp/main/SVPpay.png" alt="Shree Vilas Palace QR" class="qr-code" crossorigin="anonymous">
+        </div>
+        <div class="qr-code-section" id="qrSecSandeep">
+          <img src="https://raw.githubusercontent.com/Clean-Scripts/svp/main/Sandeep.jpg" alt="Sandeep Jaiswal QR" class="qr-code" crossorigin="anonymous">
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div id="rc" class="pg">
-<div class="stats" id="statsRow">
-<div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
-<div class="stat"><div class="n" id="sa">0</div><div class="l">Currently In</div></div>
-<div class="stat" id="earnStat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
-</div>
-<button type="button" class="btn-secondary" id="refreshBtn"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
-<div id="gl" style="margin-top:10px"></div>
-</div>
-
+  <div id="rc" class="pg">
+    <div class="stats" id="statsRow">
+      <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
+      <div class="stat"><div class="n" id="sa">0</div><div class="l">Currently In</div></div>
+      <div class="stat" id="earnStat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
+    </div>
+    <button type="button" class="btn-secondary" id="refreshBtn" style="margin-bottom:12px;"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
+    <div id="gl"></div>
+  </div>
 </div>
 
 <script>
@@ -477,7 +562,6 @@ document.getElementById('navRc').onclick=function(){
   renderGuests();
 };
 
-// Liquid Glass Toggle Logic for QR Codes with LocalStorage Persistence
 function switchQr(qrType){
   var btnSvp = document.getElementById('btnQrSvp');
   var btnSandeep = document.getElementById('btnQrSandeep');
@@ -501,23 +585,18 @@ function switchQr(qrType){
 
 document.getElementById('btnQrSvp').onclick = function(){ switchQr('svp'); };
 document.getElementById('btnQrSandeep').onclick = function(){ switchQr('sandeep'); };
-
-// Restore last selected QR code on page reload
 var savedQr = localStorage.getItem('svp_active_qr') || 'svp';
 switchQr(savedQr);
 
-// Mobile Number enter karne par Repeat Customer Check aur Alert
 document.getElementById('fm').oninput = function() {
   var mobileVal = this.value.trim();
   if (mobileVal.length === 10) {
     var pastVisits = G.filter(function(item) {
       return item.mobile === mobileVal;
     });
-
     if (pastVisits.length > 0) {
       var lastVisit = pastVisits[0];
       toastMsg('tst', '⚠️ Repeat Customer! Yeh pehle ' + pastVisits.length + ' baar aa chuke hain. (Last Room: ' + lastVisit.room + ')', 'ts');
-      
       var nameInput = document.getElementById('fn');
       if (!nameInput.value) { nameInput.value = lastVisit.naam; }
       var stateSelect = document.getElementById('fst');
@@ -526,10 +605,7 @@ document.getElementById('fm').oninput = function() {
   }
 };
 
-// Upload handlers for Front and Back side
-document.getElementById('upboxFront').onclick=function(){
-  document.getElementById('fpFront').click();
-};
+document.getElementById('upboxFront').onclick=function(){ document.getElementById('fpFront').click(); };
 document.getElementById('fpFront').onchange=function(e){
   var f=e.target.files[0];
   if(!f)return;
@@ -543,9 +619,7 @@ document.getElementById('fpFront').onchange=function(e){
   r.readAsDataURL(f);
 };
 
-document.getElementById('upboxBack').onclick=function(){
-  document.getElementById('fpBack').click();
-};
+document.getElementById('upboxBack').onclick=function(){ document.getElementById('fpBack').click(); };
 document.getElementById('fpBack').onchange=function(e){
   var f=e.target.files[0];
   if(!f)return;
@@ -563,15 +637,13 @@ function toastMsg(elId,msg,type){
   var el=document.getElementById(elId);
   if(!el)return;
   el.className='toast '+type;
-  var icon=type==='ts'?'check':(type==='te'?'alert-circle':'info-circle');
-  el.innerHTML='<i class="ti ti-'+icon+'"></i> '+msg;
+  var icon=type==='ts'?'circle-check':(type==='te'?'alert-triangle':'info-circle');
+  el.innerHTML='<i class="ti ti-'+icon+'" style="font-size:18px;"></i> <span>'+msg+'</span>';
   el.style.display='flex';
   setTimeout(function(){el.style.display='none';},6000);
 }
 
-document.getElementById('saveBtn').onclick=function(){
-  saveGuest();
-};
+document.getElementById('saveBtn').onclick=function(){ saveGuest(); };
 
 function saveGuest(){
   var naam=document.getElementById('fn').value.trim();
@@ -587,13 +659,14 @@ function saveGuest(){
   var ni=nowInfo();
   var g={
     localId:'G'+Date.now(),
-    naam:naam,mobile:mobile,room:room,
+    naam:naam, mobile:mobile, room:room,
     state:document.getElementById('fst').value.trim(),
     aadhaar: document.getElementById('fa').value.trim(),
+    kiraya:'',
     photoUrl:pBase64Front,
     photoUrlBack:pBase64Back,
-    ciDate:ni.date,ciTime:ni.time,
-    coDate:'',coTime:'',
+    ciDate:ni.date, ciTime:ni.time,
+    coDate:'', coTime:'',
     sNo:'',
     status:'checked-in'
   };
@@ -601,32 +674,25 @@ function saveGuest(){
   function finishSave(){
     G.unshift(g);
     localStorage.setItem('svp_guests', JSON.stringify(G));
-    
-    var ids = ['fn', 'fm', 'fr', 'fa', 'fk'];
+    var ids = ['fn', 'fm', 'fr', 'fa'];
     for(var i=0; i<ids.length; i++){ 
       if(document.getElementById(ids[i])) document.getElementById(ids[i]).value = ''; 
     }
-    
     if(document.getElementById('fst')) document.getElementById('fst').selectedIndex = 0;
-    
-    pBase64Front = null;
-    pBase64Back = null;
-    
+    pBase64Front = null; pBase64Back = null;
     if(document.getElementById('fpFront')) document.getElementById('fpFront').value = '';
     if(document.getElementById('fpBack')) document.getElementById('fpBack').value = '';
-    
     if(document.getElementById('ppFront')) document.getElementById('ppFront').style.display = 'none';
     if(document.getElementById('ppBack')) document.getElementById('ppBack').style.display = 'none';
-    
     btn.disabled = false;
     btn.innerHTML = '<i class="ti ti-check"></i>Check-In Save';
   }
 
   if(CFG.scriptUrl){
     var payload={
-      action:'add',naam:g.naam,mobile:g.mobile,room:g.room,
-      state:g.state,aadhaar:g.aadhaar,
-      ciDate:g.ciDate,ciTime:g.ciTime
+      action:'add', naam:g.naam, mobile:g.mobile, room:g.room,
+      state:g.state, aadhaar:g.aadhaar,
+      ciDate:g.ciDate, ciTime:g.ciTime
     };
     if(pBase64Front){ payload.photoBase64 = pBase64Front; }
     if(pBase64Back){ payload.photoBase64Back = pBase64Back; }
@@ -641,7 +707,6 @@ function saveGuest(){
         g.sNo=data.sNo;
         g.photoUrl=data.photoUrl||g.photoUrl;
         g.photoUrlBack=data.photoUrlBack||g.photoUrlBack;
-        
         var visitText = data.visitCount ? ' (Total Visits: ' + data.visitCount + ')' : '';
         toastMsg('tst',naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo + visitText,'ts');
       }else{
@@ -658,9 +723,7 @@ function saveGuest(){
   }
 }
 
-document.getElementById('refreshBtn').onclick=function(){
-  loadFromSheet();
-};
+document.getElementById('refreshBtn').onclick=function(){ loadFromSheet(); };
 
 function loadFromSheet(){
   if(!CFG.scriptUrl){ toastMsg('tst','Sheet abhi connect nahi hai','te'); return; }
@@ -672,7 +735,6 @@ function loadFromSheet(){
     for(var i=1;i<rows.length;i++){
       var r=rows[i];
       if(!r[0])continue;
-      
       newG.push({
         sNo: r[0],
         ciDate: r[1],
@@ -714,21 +776,41 @@ function renderGuests(){
     var g=G[idx];
     var avatar;
     if(g.photoUrl && g.photoUrl.indexOf('data:')===0){
-      avatar='<img class="gav" src="'+g.photoUrl+'"/>';
+      avatar='<img class="gav" src="'+g.photoUrl+'" alt="Avatar"/>';
     }else if(g.photoUrl){
-      avatar='<div class="gavp"><i class="ti ti-link"></i></div>';
+      avatar='<div class="gavp"><i class="ti ti-photo"></i></div>';
     }else{
       avatar='<div class="gavp"><i class="ti ti-user"></i></div>';
     }
     var idKey=g.sNo||g.localId;
-    var checkoutBtn=g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'">Out</button>' : '';
-    
-    var photoLink=(g.photoUrl && g.photoUrl.indexOf('data:')!==0) ? '<a href="'+g.photoUrl+'" target="_blank" style="color:#185FA5">\ud83d\udcce Front Photo</a>' : '';
-    var photoLinkBack=(g.photoUrlBack && g.photoUrlBack.indexOf('data:')!==0) ? '<a href="'+g.photoUrlBack+'" target="_blank" style="color:#185FA5">\ud83d\udcce Back Photo</a>' : '';
-    
+    var statusBdg = g.status==='checked-in' ? '<span class="bdg bin">Checked In</span>' : '<span class="bdg bout">Checked Out</span>';
+    var checkoutBtn = g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'"><i class="ti ti-door-exit" style="font-size:18px;"></i> Checkout Now</button>' : '';
+
+    var photoLink=(g.photoUrl && g.photoUrl.indexOf('data:')!==0) ? '<a href="'+g.photoUrl+'" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><i class="ti ti-paperclip"></i> Front ID</a>' : '';
+    var photoLinkBack=(g.photoUrlBack && g.photoUrlBack.indexOf('data:')!==0) ? '<a href="'+g.photoUrlBack+'" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><i class="ti ti-paperclip"></i> Back ID</a>' : '';
+
+    htmlParts.push(
+      '<div class="gcard">' +
+        '<div class="gtop">' +
+          avatar +
+          '<div class="gi">' +
+            '<div class="gn">'+(g.naam||'Guest')+' '+statusBdg+'</div>' +
+            '<div class="gm"><i class="ti ti-phone" style="font-size:11px;"></i> '+(g.mobile||'-')+' &nbsp;|&nbsp; <i class="ti ti-door" style="font-size:11px;"></i> Room: <b>'+(g.room||'-')+'</b></div>' +
+            '<div class="gm" style="color:#64748b; font-size:12px;">State: '+(g.state||'-')+'</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="tinfo">' +
+          '<div><i class="ti ti-login"></i> In: '+g.ciDate+' '+g.ciTime+'</div>' +
+          (g.coDate ? '<div><i class="ti ti-logout"></i> Out: '+g.coDate+' '+g.coTime+'</div>' : '') +
+          (photoLink ? '<div>'+photoLink+'</div>' : '') +
+          (photoLinkBack ? '<div>'+photoLinkBack+'</div>' : '') +
+        '</div>' +
+        checkoutBtn +
+      '</div>'
+    );
   }
 
-  document.getElementById('gl').innerHTML=htmlParts.join('')||'<p style="text-align:center;color:#999;padding:20px">Koi guest nahi</p>';
+  document.getElementById('gl').innerHTML=htmlParts.join('')||'<div class="card" style="text-align:center;color:#64748b;padding:30px">Koi guest record available nahi hai</div>';
 
   var coBtns=document.querySelectorAll('[data-action="checkout"]');
   for(var c=0;c<coBtns.length;c++){
@@ -743,9 +825,10 @@ function doCheckout(idOrSNo){
   }
   if(!g)return;
   var ni=nowInfo();
-  g.status='checked-out';g.coDate=ni.date;g.coTime=ni.time;
+  g.status='checked-out'; g.coDate=ni.date; g.coTime=ni.time;
   localStorage.setItem('svp_guests',JSON.stringify(G));
   renderGuests();
+  toastMsg('tst', g.naam + ' successfully checked out!','ts');
   if(CFG.scriptUrl && g.sNo){
     fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:ni.date,coTime:ni.time})}).catch(function(){});
   }
