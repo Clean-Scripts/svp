@@ -1,3 +1,8 @@
+Aapke code se **Owner Login / Password / Delete button wali saari cheezein hata di gayi hain**, aur saath hi **Mobile Camera capture support** (`capture="environment"`), **Repeat Customer alert**, aur **History tracking** ko properly integrate kar diya gaya hai.
+
+Yeh raha aapka complete aur updated **HTML code**:
+
+```html
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
@@ -49,28 +54,6 @@
     }
     .hdr h1 { font-size: clamp(18px, 5vw, 22px); font-weight: 500; }
     .hdr p { font-size: 12px; color: #666; margin-top: 2px; }
-  
-    .owner-toggle {
-      position: absolute;
-      top: 14px;
-      right: 0;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 10px;
-      padding: 6px 10px;
-      font-size: 11px;
-      color: #666;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .owner-toggle.active {
-      background: rgba(99, 153, 34, 0.15);
-      color: #3B6D11;
-      border-color: rgba(99, 153, 34, 0.3);
-    }
   
     .nav {
       display: flex;
@@ -257,49 +240,25 @@
   
     .abtn { padding: 6px 10px; border-radius: 8px; font-size: 12px; border: none; cursor: pointer; font-weight: 500; -webkit-tap-highlight-color: transparent; }
     .bco { background: #FAEEDA; color: #633806; }
-    .bdl { background: #FCEBEB; color: #A32D2D; }
   
     .toast { padding: 12px 14px; border-radius: 11px; font-size: 14px; margin-bottom: 10px; display: none; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
     .ts { background: #EAF3DE; color: #3B6D11; }
     .te { background: #FCEBEB; color: #A32D2D; }
     .tinf { background: #E6F1FB; color: #185FA5; }
-    
-    .statusdot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
-    .dot-green { background: #3B6D11; }
-    .dot-gray { background: #999; }
-  
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 16px;
-    }
-    .modal-box { background: #fff; border-radius: 18px; padding: 22px; max-width: 340px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-    .modal-box h3 { font-size: 17px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .modal-box p { font-size: 13px; color: #666; margin-bottom: 14px; }
-    .modal-box input { width: 100%; padding: 12px; border: 1.5px solid rgba(200, 210, 230, 0.7); border-radius: 11px; font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; text-align: center; }
-    .modal-actions { display: flex; gap: 8px; }
-    .modal-actions button { flex: 1; padding: 12px; border-radius: 11px; border: none; font-size: 14px; font-weight: 500; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    .mbtn-cancel { background: #f0f0f0; color: #666; }
-    .mbtn-confirm { background: linear-gradient(135deg, #378ADD, #534AB7); color: #fff; }
   
     .footer {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 12px;
       padding: 12px 0 4px;
       margin-top: 12px;
+      flex-wrap: wrap;
     }
     .qr-code-section {
       width: 100%;
-      max-width: 180px;
+      max-width: 150px;
       display: flex;
       justify-content: center;
       padding: 8px;
@@ -315,8 +274,6 @@
       object-fit: contain;
     }
   </style>
-
-  
 </head>
 <body>
 <div class="shell">
@@ -324,13 +281,11 @@
   <div class="logo"><img src="https://nishu-coder.github.io/vilas-palace/Logo.png"></div>
   <h1>Shree Vilas Palace Manager</h1>
   <p>Check-In / Check-Out Records</p>
-  <div class="owner-toggle" id="ownerToggle"><i class="ti ti-lock"></i><span id="ownerToggleText">Owner Login</span></div>
 </div>
 
 <div class="nav">
 <button type="button" class="on" id="navCi"><i class="ti ti-door-enter"></i>Check-In</button>
 <button type="button" id="navRc"><i class="ti ti-users"></i>Guests</button>
-<button type="button" id="navSe" style="display:none"><i class="ti ti-settings"></i>Setup</button>
 </div>
 
 <div id="ci" class="pg" style="display:block">
@@ -391,14 +346,14 @@
   <div class="lbl">ID Proof (Aadhaar Card)</div>
   <div class="row">
     <div class="f">
-      <div class="upbox" id="upboxFront"><div class="t">Aadhaar Front Upload</div><div class="s">JPG/PNG</div></div>
-      <input type="file" id="fpFront" accept="image/*" style="display:none"/>
+      <div class="upbox" id="upboxFront"><div class="t">Aadhaar Front Capture / Upload</div><div class="s">Camera or Gallery</div></div>
+      <input type="file" id="fpFront" accept="image/*" capture="environment" style="display:none"/>
       <div id="ppFront" class="preview" style="margin-top: 8px;"><img id="pimFront"/><div id="pnameFront" style="font-size:11px"></div></div>
     </div>
     
     <div class="f">
-      <div class="upbox" id="upboxBack"><div class="t">Aadhaar Back Upload</div><div class="s">JPG/PNG</div></div>
-      <input type="file" id="fpBack" accept="image/*" style="display:none"/>
+      <div class="upbox" id="upboxBack"><div class="t">Aadhaar Back Capture / Upload</div><div class="s">Camera or Gallery</div></div>
+      <input type="file" id="fpBack" accept="image/*" capture="environment" style="display:none"/>
       <div id="ppBack" class="preview" style="margin-top: 8px;"><img id="pimBack"/><div id="pnameBack" style="font-size:11px"></div></div>
     </div>
   </div>
@@ -424,14 +379,6 @@
 <div id="gl" style="margin-top:10px"></div>
 </div>
 
-<div id="se" class="pg">
-<div class="card">
-<div class="lbl">Change Password</div>
-<div class="f" style="margin-bottom:8px"><label>Naya password (4+ digit)</label><input id="newPass" placeholder="Naya password"/></div>
-<button type="button" class="btn-secondary" id="changePassBtn"><i class="ti ti-key"></i> Password update karein</button>
-</div>
-</div>
-
 </div>
 
 <script>
@@ -442,8 +389,6 @@ var CFG={
 try{G=JSON.parse(localStorage.getItem('svp_guests')||'[]');}catch(e){G=[];}
 var pBase64Front=null;
 var pBase64Back=null;
-var isOwner=false;
-var OWNER_PASS=localStorage.getItem('svp_owner_pass')||'1234';
 
 function nowInfo(){
   var n=new Date();
@@ -479,38 +424,25 @@ document.getElementById('navRc').onclick=function(){
   renderGuests();
 };
 
-document.getElementById('ownerToggle').onclick=function(){
-  if(isOwner){
-    setOwnerMode(false);
-  }else{
-    openPassModal();
+// Mobile Number enter karne par Repeat Customer Check aur Alert
+document.getElementById('fm').oninput = function() {
+  var mobileVal = this.value.trim();
+  if (mobileVal.length === 10) {
+    var pastVisits = G.filter(function(item) {
+      return item.mobile === mobileVal;
+    });
+
+    if (pastVisits.length > 0) {
+      var lastVisit = pastVisits[0];
+      toastMsg('tst', '⚠️ Repeat Customer! Yeh pehle ' + pastVisits.length + ' baar aa chuke hain. (Last Room: ' + lastVisit.room + ')', 'ts');
+      
+      var nameInput = document.getElementById('fn');
+      if (!nameInput.value) { nameInput.value = lastVisit.naam; }
+      var stateSelect = document.getElementById('fst');
+      if (!stateSelect.value && lastVisit.state) { stateSelect.value = lastVisit.state; }
+    }
   }
 };
-
-function openPassModal(){
-  document.getElementById('passInput').value='';
-  document.getElementById('passError').style.display='none';
-  document.getElementById('passModal').style.display='flex';
-  setTimeout(function(){ document.getElementById('passInput').focus(); },100);
-}
-function closePassModal(){
-  document.getElementById('passModal').style.display='none';
-}
-document.getElementById('passCancel').onclick=closePassModal;
-document.getElementById('passConfirm').onclick=function(){
-  var val=document.getElementById('passInput').value;
-  if(val===OWNER_PASS){
-    setOwnerMode(true);
-    closePassModal();
-  }else{
-    document.getElementById('passError').style.display='block';
-  }
-};
-document.getElementById('passInput').onkeydown=function(e){
-  if(e.key==='Enter'){ document.getElementById('passConfirm').click(); }
-};
-
-
 
 // Upload handlers for Front and Back side
 document.getElementById('upboxFront').onclick=function(){
@@ -552,7 +484,7 @@ function toastMsg(elId,msg,type){
   var icon=type==='ts'?'check':(type==='te'?'alert-circle':'info-circle');
   el.innerHTML='<i class="ti ti-'+icon+'"></i> '+msg;
   el.style.display='flex';
-  setTimeout(function(){el.style.display='none';},4000);
+  setTimeout(function(){el.style.display='none';},6000);
 }
 
 document.getElementById('saveBtn').onclick=function(){
@@ -628,13 +560,15 @@ function saveGuest(){
         g.sNo=data.sNo;
         g.photoUrl=data.photoUrl||g.photoUrl;
         g.photoUrlBack=data.photoUrlBack||g.photoUrlBack;
-        toastMsg('tst',naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo,'ts');
+        
+        var visitText = data.visitCount ? ' (Total Visits: ' + data.visitCount + ')' : '';
+        toastMsg('tst',naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo + visitText,'ts');
       }else{
-        toastMsg('tst','Sheet error: '+(data.error||'unknown')+' \u2014 local mein save kiya','te');
+        toastMsg('tst','Sheet error: '+(data.error||'unknown')+' — local mein save kiya','te');
       }
       finishSave();
     }).catch(function(err){
-      toastMsg('tst','Sheet se connect nahi hua \u2014 local mein save kiya','te');
+      toastMsg('tst','Sheet se connect nahi hua — local mein save kiya','te');
       finishSave();
     });
   }else{
@@ -707,18 +641,16 @@ function renderGuests(){
     }
     var idKey=g.sNo||g.localId;
     var checkoutBtn=g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'">Out</button>' : '';
-    var deleteBtn=isOwner ? '<button type="button" class="abtn bdl" data-action="delete" data-id="'+idKey+'"><i class="ti ti-trash"></i></button>' : '';
     
     var photoLink=(g.photoUrl && g.photoUrl.indexOf('data:')!==0) ? '<a href="'+g.photoUrl+'" target="_blank" style="color:#185FA5">\ud83d\udcce Front Photo</a>' : '';
     var photoLinkBack=(g.photoUrlBack && g.photoUrlBack.indexOf('data:')!==0) ? '<a href="'+g.photoUrlBack+'" target="_blank" style="color:#185FA5">\ud83d\udcce Back Photo</a>' : '';
     
-    var fareInfo = (isOwner && g.kiraya) ? ' \u00b7 \u20b9'+g.kiraya : '';
+    var fareInfo = g.kiraya ? ' \u00b7 \u20b9'+g.kiraya : '';
     htmlParts.push(
       '<div class="gcard"><div class="gtop">'+avatar+
       '<div class="gi"><div class="gn">'+(g.naam||'\u2014')+'<span class="bdg '+(g.status==='checked-in'?'bin':'bout')+'">'+(g.status==='checked-in'?'Aaye':'Gaye')+'</span></div>'+
       '<div class="gm">'+(g.sNo||'')+' \u00b7 Room '+(g.room||'')+' \u00b7 '+(g.mobile||'')+(g.state?' \u00b7 '+g.state:'')+fareInfo+'</div></div>'+
       checkoutBtn+
-      deleteBtn+
       '</div><div class="tinfo"><span>In: '+(g.ciDate||'')+' '+(g.ciTime||'')+'</span>'+
       (g.coDate?'<span>\u00b7 Out: '+g.coDate+' '+g.coTime+'</span>':'')+
       photoLink+(photoLinkBack?' \u00b7 '+photoLinkBack:'')+'</div></div>'
@@ -730,10 +662,6 @@ function renderGuests(){
   var coBtns=document.querySelectorAll('[data-action="checkout"]');
   for(var c=0;c<coBtns.length;c++){
     coBtns[c].onclick=function(){ doCheckout(this.getAttribute('data-id')); };
-  }
-  var delBtns=document.querySelectorAll('[data-action="delete"]');
-  for(var d=0;d<delBtns.length;d++){
-    delBtns[d].onclick=function(){ deleteGuest(this.getAttribute('data-id')); };
   }
 }
 
@@ -751,18 +679,8 @@ function doCheckout(idOrSNo){
     fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:ni.date,coTime:ni.time})}).catch(function(){});
   }
 }
-
-function deleteGuest(idOrSNo){
-  if(!isOwner)return;
-  if(!confirm('Delete karein?'))return;
-  var newG=[];
-  for(var i=0;i<G.length;i++){
-    if((G[i].sNo||G[i].localId)!==idOrSNo){ newG.push(G[i]); }
-  }
-  G=newG;
-  localStorage.setItem('svp_guests',JSON.stringify(G));
-  renderGuests();
-}
 </script>
 </body>
 </html>
+
+```
