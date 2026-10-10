@@ -535,7 +535,7 @@
       pointer-events: none;
     }
 
-    /* Fullscreen Modal & Zoom Controls */
+    /* Fullscreen Modal */
     .qr-modal {
       position: fixed;
       inset: 0;
@@ -721,8 +721,9 @@
               <button type="button" class="btn-choice" id="btnCamFront"><i class="ti ti-camera"></i> Camera</button>
               <button type="button" class="btn-choice" id="btnGalFront"><i class="ti ti-photo"></i> Files / Gallery</button>
             </div>
+            <!-- Explicit file inputs with universal mobile mime types and reset handlers -->
             <input type="file" id="fpFrontCam" accept="image/*" capture="environment" style="display:none"/>
-            <input type="file" id="fpFrontGal" accept="image/*" style="display:none"/>
+            <input type="file" id="fpFrontGal" accept="image/*,image/jpeg,image/png,image/webp" style="display:none"/>
             <div id="ppFront" class="preview">
               <img id="pimFront" alt="Front Preview"/>
               <div id="pnameFront" style="font-size:11px; color:#16a34a; font-weight:700;"></div>
@@ -739,8 +740,9 @@
               <button type="button" class="btn-choice" id="btnCamBack"><i class="ti ti-camera"></i> Camera</button>
               <button type="button" class="btn-choice" id="btnGalBack"><i class="ti ti-photo"></i> Files / Gallery</button>
             </div>
+            <!-- Explicit file inputs with universal mobile mime types and reset handlers -->
             <input type="file" id="fpBackCam" accept="image/*" capture="environment" style="display:none"/>
-            <input type="file" id="fpBackGal" accept="image/*" style="display:none"/>
+            <input type="file" id="fpBackGal" accept="image/*,image/jpeg,image/png,image/webp" style="display:none"/>
             <div id="ppBack" class="preview">
               <img id="pimBack" alt="Back Preview"/>
               <div id="pnameBack" style="font-size:11px; color:#16a34a; font-weight:700;"></div>
@@ -889,49 +891,99 @@ document.getElementById('qrSecSandeep').onclick = function() {
   openQrModal('https://raw.githubusercontent.com/Clean-Scripts/svp/main/Sandeep.jpg', 'Sandeep Jaiswal QR');
 };
 
-/* File Upload & Compression */
+/* Universal Mobile File Processing & Downscaling */
 function handleFileSelection(file, targetSide) {
   if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var rawData = e.target.result;
-    var img = new Image();
-    img.onload = function() {
+
+  // Use URL.createObjectURL for fast image decoding without heap memory crash
+  var objectUrl = URL.createObjectURL(file);
+  var img = new Image();
+
+  img.onload = function() {
+    URL.revokeObjectURL(objectUrl);
+    try {
       var canvas = document.createElement('canvas');
-      var maxDim = 1200;
+      var maxDim = 1000;
       var w = img.width;
       var h = img.height;
+
       if (w > maxDim || h > maxDim) {
-        if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
-        else { w = Math.round((w * maxDim) / h); h = maxDim; }
+        if (w > h) {
+          h = Math.round((h * maxDim) / w);
+          w = maxDim;
+        } else {
+          w = Math.round((w * maxDim) / h);
+          h = maxDim;
+        }
       }
+
       canvas.width = w;
       canvas.height = h;
       var ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, w, h);
-      var optimizedData = canvas.toDataURL('image/jpeg', 0.82);
+      var compressedData = canvas.toDataURL('image/jpeg', 0.80);
 
       if (targetSide === 'front') {
-        pBase64Front = optimizedData;
-        document.getElementById('pimFront').src = optimizedData;
-        document.getElementById('pnameFront').textContent = file.name.substring(0, 18) + '...';
+        pBase64Front = compressedData;
+        document.getElementById('pimFront').src = compressedData;
+        document.getElementById('pnameFront').textContent = file.name.substring(0, 16) + '...';
         document.getElementById('ppFront').style.display = 'flex';
       } else {
-        pBase64Back = optimizedData;
-        document.getElementById('pimBack').src = optimizedData;
-        document.getElementById('pnameBack').textContent = file.name.substring(0, 18) + '...';
+        pBase64Back = compressedData;
+        document.getElementById('pimBack').src = compressedData;
+        document.getElementById('pnameBack').textContent = file.name.substring(0, 16) + '...';
         document.getElementById('ppBack').style.display = 'flex';
       }
-    };
-    img.src = rawData;
+    } catch(err) {
+      // Fallback: direct FileReader if canvas fails on very low memory device
+      fallbackFileReader(file, targetSide);
+    }
+  };
+
+  img.onerror = function() {
+    URL.revokeObjectURL(objectUrl);
+    fallbackFileReader(file, targetSide);
+  };
+
+  img.src = objectUrl;
+}
+
+function fallbackFileReader(file, targetSide) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var data = e.target.result;
+    if (targetSide === 'front') {
+      pBase64Front = data;
+      document.getElementById('pimFront').src = data;
+      document.getElementById('pnameFront').textContent = file.name.substring(0, 16) + '...';
+      document.getElementById('ppFront').style.display = 'flex';
+    } else {
+      pBase64Back = data;
+      document.getElementById('pimBack').src = data;
+      document.getElementById('pnameBack').textContent = file.name.substring(0, 16) + '...';
+      document.getElementById('ppBack').style.display = 'flex';
+    }
   };
   reader.readAsDataURL(file);
 }
 
-document.getElementById('btnCamFront').onclick = function() { document.getElementById('fpFrontCam').click(); };
-document.getElementById('btnGalFront').onclick = function() { document.getElementById('fpFrontGal').click(); };
-document.getElementById('fpFrontCam').onchange = function(e) { handleFileSelection(e.target.files[0], 'front'); };
-document.getElementById('fpFrontGal').onchange = function(e) { handleFileSelection(e.target.files[0], 'front'); };
+/* Bindings with Explicit Reset on Click to ensure change event fires */
+document.getElementById('btnCamFront').onclick = function() {
+  var inp = document.getElementById('fpFrontCam');
+  inp.value = '';
+  inp.click();
+};
+document.getElementById('btnGalFront').onclick = function() {
+  var inp = document.getElementById('fpFrontGal');
+  inp.value = '';
+  inp.click();
+};
+document.getElementById('fpFrontCam').onchange = function(e) {
+  if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0], 'front');
+};
+document.getElementById('fpFrontGal').onchange = function(e) {
+  if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0], 'front');
+};
 document.getElementById('rmFront').onclick = function() {
   pBase64Front = null;
   document.getElementById('fpFrontCam').value = '';
@@ -939,10 +991,22 @@ document.getElementById('rmFront').onclick = function() {
   document.getElementById('ppFront').style.display = 'none';
 };
 
-document.getElementById('btnCamBack').onclick = function() { document.getElementById('fpBackCam').click(); };
-document.getElementById('btnGalBack').onclick = function() { document.getElementById('fpBackGal').click(); };
-document.getElementById('fpBackCam').onchange = function(e) { handleFileSelection(e.target.files[0], 'back'); };
-document.getElementById('fpBackGal').onchange = function(e) { handleFileSelection(e.target.files[0], 'back'); };
+document.getElementById('btnCamBack').onclick = function() {
+  var inp = document.getElementById('fpBackCam');
+  inp.value = '';
+  inp.click();
+};
+document.getElementById('btnGalBack').onclick = function() {
+  var inp = document.getElementById('fpBackGal');
+  inp.value = '';
+  inp.click();
+};
+document.getElementById('fpBackCam').onchange = function(e) {
+  if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0], 'back');
+};
+document.getElementById('fpBackGal').onchange = function(e) {
+  if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0], 'back');
+};
 document.getElementById('rmBack').onclick = function() {
   pBase64Back = null;
   document.getElementById('fpBackCam').value = '';
