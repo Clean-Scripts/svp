@@ -332,10 +332,11 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* 2 Stats Columns without Earnings */
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
       margin-bottom: 14px;
     }
     .stat {
@@ -348,8 +349,8 @@
       text-align: center;
       box-shadow: var(--glass-glow);
     }
-    .stat .n { font-size: clamp(18px, 5vw, 22px); font-weight: 800; color: var(--text-main); }
-    .stat .l { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 3px; letter-spacing: 0.5px; }
+    .stat .n { font-size: clamp(20px, 5vw, 24px); font-weight: 800; color: var(--text-main); }
+    .stat .l { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 3px; letter-spacing: 0.5px; }
 
     .gcard {
       background: var(--glass-bg);
@@ -388,8 +389,8 @@
     }
     [data-theme="dark"] .tinfo { color: #fcd34d; background: rgba(245, 158, 11, 0.08); }
     .tinfo-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
-    .id-links { display: flex; gap: 10px; margin-top: 4px; padding-top: 8px; border-top: 1px dashed rgba(245, 158, 11, 0.3); }
-    .id-links a { color: var(--accent-blue); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; background: var(--glass-bg); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--glass-border); }
+    .id-links { display: flex; gap: 10px; margin-top: 4px; padding-top: 8px; border-top: 1px dashed rgba(245, 158, 11, 0.3); flex-wrap: wrap; }
+    .id-links a { color: var(--accent-blue); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; background: var(--glass-bg); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--glass-border); font-size: 12px; }
 
     .abtn {
       width: 100%;
@@ -721,7 +722,6 @@
               <button type="button" class="btn-choice" id="btnCamFront"><i class="ti ti-camera"></i> Camera</button>
               <button type="button" class="btn-choice" id="btnGalFront"><i class="ti ti-photo"></i> Files / Gallery</button>
             </div>
-            <!-- Explicit file inputs with universal mobile mime types and reset handlers -->
             <input type="file" id="fpFrontCam" accept="image/*" capture="environment" style="display:none"/>
             <input type="file" id="fpFrontGal" accept="image/*,image/jpeg,image/png,image/webp" style="display:none"/>
             <div id="ppFront" class="preview">
@@ -740,7 +740,6 @@
               <button type="button" class="btn-choice" id="btnCamBack"><i class="ti ti-camera"></i> Camera</button>
               <button type="button" class="btn-choice" id="btnGalBack"><i class="ti ti-photo"></i> Files / Gallery</button>
             </div>
-            <!-- Explicit file inputs with universal mobile mime types and reset handlers -->
             <input type="file" id="fpBackCam" accept="image/*" capture="environment" style="display:none"/>
             <input type="file" id="fpBackGal" accept="image/*,image/jpeg,image/png,image/webp" style="display:none"/>
             <div id="ppBack" class="preview">
@@ -780,7 +779,6 @@
     <div class="stats" id="statsRow">
       <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
       <div class="stat"><div class="n" id="sa">0</div><div class="l">Currently In</div></div>
-      <div class="stat" id="earnStat"><div class="n" id="se">₹0</div><div class="l">Earnings</div></div>
     </div>
     <button type="button" class="btn-secondary" id="refreshBtn" style="margin-bottom:12px;"><i class="ti ti-refresh"></i> Sheet se refresh karein</button>
     <div id="gl"></div>
@@ -895,7 +893,6 @@ document.getElementById('qrSecSandeep').onclick = function() {
 function handleFileSelection(file, targetSide) {
   if (!file) return;
 
-  // Use URL.createObjectURL for fast image decoding without heap memory crash
   var objectUrl = URL.createObjectURL(file);
   var img = new Image();
 
@@ -935,7 +932,6 @@ function handleFileSelection(file, targetSide) {
         document.getElementById('ppBack').style.display = 'flex';
       }
     } catch(err) {
-      // Fallback: direct FileReader if canvas fails on very low memory device
       fallbackFileReader(file, targetSide);
     }
   };
@@ -967,7 +963,7 @@ function fallbackFileReader(file, targetSide) {
   reader.readAsDataURL(file);
 }
 
-/* Bindings with Explicit Reset on Click to ensure change event fires */
+/* File Picker Triggers */
 document.getElementById('btnCamFront').onclick = function() {
   var inp = document.getElementById('fpFrontCam');
   inp.value = '';
@@ -1222,12 +1218,16 @@ function loadFromSheet() {
       for (var i = 1; i < rows.length; i++) {
         var r = rows[i];
         if (!r[0]) continue;
-        var rawFront = String(r[11] || '');
-        var rawBack = String(r[12] || '');
+        
+        // Scan for front & back photo URLs dynamically across remaining columns
+        var rawFront = String(r[11] || '').trim();
+        var rawBack = String(r[12] || '').trim();
+        
         var cleanState = String(r[7] || r[8] || '-').replace(/https?:\/\/[^\s]+/g, '').trim();
         if (cleanState.indexOf('1899-') !== -1 || cleanState.indexOf('202') !== -1) {
           cleanState = r[7] && r[7].length < 30 ? r[7] : 'N/A';
         }
+        
         newG.push({
           sNo: r[0],
           ciDate: r[1],
@@ -1256,15 +1256,22 @@ function loadFromSheet() {
     });
 }
 
+/* Helper to render image link or popup preview */
+function createIdButtonHtml(urlOrData, labelText) {
+  if (!urlOrData || String(urlOrData).trim().length < 5) return '';
+  var clean = String(urlOrData).trim();
+  if (clean.indexOf('data:') === 0) {
+    return '<a href="javascript:void(0)" onclick="openQrModal(\'' + clean.replace(/'/g, "\\'") + '\', \'' + labelText + '\')"><i class="ti ti-id"></i> ' + labelText + '</a>';
+  }
+  return '<a href="' + clean + '" target="_blank" rel="noopener noreferrer"><i class="ti ti-id"></i> ' + labelText + '</a>';
+}
+
 /* Render Guest Cards */
 function renderGuests() {
   var act = 0;
   for (var k = 0; k < G.length; k++) { if (G[k].status === 'checked-in') act++; }
   document.getElementById('st').textContent = G.length;
   document.getElementById('sa').textContent = act;
-  var totalEarn = 0;
-  for (var k2 = 0; k2 < G.length; k2++) { totalEarn += (Number(G[k2].kiraya) || 0); }
-  document.getElementById('se').textContent = '\u20b9' + totalEarn.toLocaleString('en-IN');
 
   var visitCounts = {};
   for (var v = 0; v < G.length; v++) {
@@ -1291,14 +1298,8 @@ function renderGuests() {
 
     var checkoutBtn = g.status === 'checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="' + idKey + '"><i class="ti ti-door-exit" style="font-size:18px;"></i> Check Out Now</button>' : '';
 
-    var photoLink = '';
-    if (g.photoUrl && g.photoUrl.length > 5) {
-      photoLink = '<a href="' + g.photoUrl + '" target="_blank"><i class="ti ti-id"></i> Front ID</a>';
-    }
-    var photoLinkBack = '';
-    if (g.photoUrlBack && g.photoUrlBack.length > 5) {
-      photoLinkBack = '<a href="' + g.photoUrlBack + '" target="_blank"><i class="ti ti-id"></i> Back ID</a>';
-    }
+    var photoLink = createIdButtonHtml(g.photoUrl, 'Front ID');
+    var photoLinkBack = createIdButtonHtml(g.photoUrlBack, 'Back ID');
 
     var checkInDisplay = formatDateTime12Hr(g.ciDate, g.ciTime);
     var checkOutDisplay = formatDateTime12Hr(g.coDate, g.coTime);
