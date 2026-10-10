@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
   <style>
-    /* Global Auto-Scaling & Liquid Glass Theme */
+    /* Global Liquid Glass & High Readability Theme */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans, system-ui, -apple-system, sans-serif); }
 
     body {
@@ -47,21 +47,17 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.6);
     }
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .hdr h1 { font-size: clamp(20px, 5vw, 24px); font-weight: 600; letter-spacing: -0.5px; color: #1e293b; }
-    .hdr p { font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 400; }
+    .logo img { width: 100%; height: 100%; object-fit: cover; }
+    .hdr h1 { font-size: clamp(20px, 5vw, 24px); font-weight: 700; letter-spacing: -0.5px; color: #1e293b; }
+    .hdr p { font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 500; }
 
     /* Liquid Glass Navigation */
     .nav {
       display: flex;
-      background: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 20px;
       padding: 6px;
       gap: 6px;
@@ -82,7 +78,7 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       -webkit-tap-highlight-color: transparent;
     }
     .nav button i { font-size: 20px; }
@@ -98,10 +94,10 @@
 
     /* Liquid Glass Cards */
     .card {
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 20px;
       padding: clamp(14px, 4vw, 20px);
       margin-bottom: 14px;
@@ -131,10 +127,10 @@
     .f label { font-size: 12px; font-weight: 600; color: #475569; }
     .f input, .f select {
       padding: 13px 14px;
-      border: 1px solid rgba(203, 213, 225, 0.7);
+      border: 1px solid rgba(203, 213, 225, 0.8);
       border-radius: 12px;
       font-size: 15px;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.85);
       color: #0f172a;
       width: 100%;
       appearance: none;
@@ -144,7 +140,7 @@
     .f input:focus, .f select:focus {
       outline: none;
       border-color: #3b82f6;
-      background: rgba(255, 255, 255, 0.95);
+      background: #ffffff;
       box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
     }
 
@@ -154,24 +150,24 @@
       gap: 8px;
       padding: 10px 16px;
       border-radius: 12px;
-      background: rgba(239, 246, 255, 0.8);
-      border: 1px solid rgba(191, 219, 254, 0.6);
+      background: rgba(239, 246, 255, 0.85);
+      border: 1px solid rgba(191, 219, 254, 0.7);
       font-size: 15px;
       font-weight: 600;
       color: #1d4ed8;
     }
 
     .upbox {
-      border: 2px dashed rgba(59, 130, 246, 0.35);
+      border: 2px dashed rgba(59, 130, 246, 0.4);
       border-radius: 14px;
-      padding: 24px 14px;
+      padding: 22px 14px;
       text-align: center;
       cursor: pointer;
       background: rgba(239, 246, 255, 0.4);
       transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .upbox:active { background: rgba(239, 246, 255, 0.7); }
+    .upbox:active { background: rgba(239, 246, 255, 0.8); }
     .upbox .t { font-size: 14px; font-weight: 600; color: #1d4ed8; }
     .upbox .s { font-size: 12px; color: #64748b; margin-top: 4px; }
 
@@ -180,8 +176,8 @@
       align-items: center;
       gap: 12px;
       padding: 10px;
-      background: rgba(240, 253, 244, 0.7);
-      border: 1px solid rgba(187, 247, 208, 0.6);
+      background: rgba(240, 253, 244, 0.8);
+      border: 1px solid rgba(187, 247, 208, 0.8);
       border-radius: 12px;
       margin-top: 10px;
     }
@@ -215,7 +211,7 @@
       padding: 14px;
       border: 1px solid rgba(59, 130, 246, 0.3);
       border-radius: 14px;
-      background: rgba(239, 246, 255, 0.6);
+      background: rgba(239, 246, 255, 0.7);
       backdrop-filter: blur(10px);
       color: #1d4ed8;
       font-size: 15px;
@@ -237,9 +233,9 @@
       margin-bottom: 14px;
     }
     .stat {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 16px;
       padding: 14px 8px;
       text-align: center;
@@ -250,39 +246,44 @@
 
     /* Guest Item Card Layout */
     .gcard {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
     }
-    .gtop { display: flex; align-items: flex-start; gap: 12px; }
-    .gav { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 1px solid rgba(255,255,255,0.8); }
-    .gavp { width: 50px; height: 50px; border-radius: 12px; background: rgba(239, 246, 255, 0.9); display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 20px; border: 1px solid rgba(191, 219, 254, 0.6); }
+    .gtop { display: flex; align-items: flex-start; gap: 14px; }
+    .gav { width: 52px; height: 52px; border-radius: 14px; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.9); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .gavp { width: 52px; height: 52px; border-radius: 14px; background: rgba(239, 246, 255, 0.95); display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 22px; border: 1px solid rgba(191, 219, 254, 0.8); }
     .gi { flex: 1; min-width: 0; font-size: 13px; }
-    .gn { font-weight: 600; font-size: 15px; color: #0f172a; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-    .gm { font-size: 13px; color: #475569; margin-top: 3px; }
+    .gn { font-weight: 700; font-size: 16px; color: #0f172a; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 2px; }
+    .gm { font-size: 13px; color: #334155; margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    
     .bdg { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 700; letter-spacing: 0.3px; }
-    .bin { background: #dcfce7; color: #166534; }
-    .bout { background: #fee2e2; color: #991b1b; }
+    .bin { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .bout { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .vcount { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
 
     .tinfo {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: rgba(254, 243, 199, 0.5);
-      border: 1px solid rgba(253, 230, 138, 0.6);
-      border-radius: 10px;
-      font-size: 11px;
-      color: #92400e;
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(254, 243, 199, 0.55);
+      border: 1px solid rgba(253, 230, 138, 0.8);
+      border-radius: 12px;
+      font-size: 12px;
+      color: #78350f;
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-weight: 500;
+      flex-direction: column;
+      gap: 6px;
+      font-weight: 600;
     }
+    .tinfo-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+    .id-links { display: flex; gap: 12px; margin-top: 4px; padding-top: 6px; border-top: 1px dashed rgba(245, 158, 11, 0.3); }
+    .id-links a { color: #2563eb; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; background: rgba(255, 255, 255, 0.6); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(191, 219, 254, 0.8); }
 
-    /* Huge Mobile-Friendly Checkout Button */
+    /* Easy Touch Checkout Button */
     .abtn {
       width: 100%;
       margin-top: 12px;
@@ -303,7 +304,7 @@
     .bco {
       background: linear-gradient(135deg, #fef3c7, #fde68a);
       color: #78350f;
-      border: 1px solid rgba(245, 158, 11, 0.4);
+      border: 1px solid rgba(245, 158, 11, 0.5);
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
     }
 
@@ -312,7 +313,7 @@
       padding: 14px 16px;
       border-radius: 14px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 14px;
       display: none;
       align-items: center;
@@ -320,9 +321,9 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       backdrop-filter: blur(10px);
     }
-    .ts { background: rgba(220, 252, 231, 0.9); color: #166534; border: 1px solid rgba(187, 247, 208, 0.8); }
-    .te { background: rgba(254, 226, 226, 0.9); color: #991b1b; border: 1px solid rgba(254, 202, 202, 0.8); }
-    .tinf { background: rgba(239, 246, 255, 0.9); color: #1e40af; border: 1px solid rgba(191, 219, 254, 0.8); }
+    .ts { background: rgba(220, 252, 231, 0.95); color: #166534; border: 1px solid rgba(187, 247, 208, 0.9); }
+    .te { background: rgba(254, 226, 226, 0.95); color: #991b1b; border: 1px solid rgba(254, 202, 202, 0.9); }
+    .tinf { background: rgba(239, 246, 255, 0.95); color: #1e40af; border: 1px solid rgba(191, 219, 254, 0.9); }
 
     /* Footer & Liquid Glass QR Toggle Styles */
     .footer {
@@ -337,10 +338,10 @@
 
     .glass-qr-toggle {
       display: flex;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 30px;
       padding: 5px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
@@ -386,17 +387,8 @@
       animation: fadeIn 0.3s ease-in-out;
     }
 
-    .qr-code-section.active {
-      display: flex;
-    }
-
-    .qr-code {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      object-fit: contain;
-    }
+    .qr-code-section.active { display: flex; }
+    .qr-code { width: 100%; height: auto; display: block; border-radius: 10px; object-fit: contain; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
@@ -528,11 +520,37 @@ try{G=JSON.parse(localStorage.getItem('svp_guests')||'[]');}catch(e){G=[];}
 var pBase64Front=null;
 var pBase64Back=null;
 
+/* Clean 12-Hour Date-Time Formatter */
+function formatDateTime12Hr(dateStr, timeStr) {
+  if (!dateStr && !timeStr) return '-';
+  var rawStr = (String(dateStr || '') + ' ' + String(timeStr || '')).trim();
+  
+  // Strip out embedded URLs if any
+  rawStr = rawStr.replace(/https?:\/\/[^\s]+/g, '').trim();
+
+  // Handle ISO formatted timestamp string
+  var isoMatch = rawStr.match(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?)/);
+  if (isoMatch) {
+    var d = new Date(isoMatch[1]);
+    if (!isNaN(d.getTime())) {
+      var dateFormatted = d.toLocaleDateString('en-GB'); // DD/MM/YYYY
+      var timeFormatted = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+      return dateFormatted + ' at ' + timeFormatted;
+    }
+  }
+
+  // Fallback for standard date + time strings
+  if (dateStr && timeStr) {
+    return dateStr + ' at ' + timeStr;
+  }
+  return rawStr || '-';
+}
+
 function nowInfo(){
   var n=new Date();
   return{
-    date:n.toLocaleDateString('en-GB'),
-    time:n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})
+    date: n.toLocaleDateString('en-GB'),
+    time: n.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
   };
 }
 
@@ -731,10 +749,22 @@ function loadFromSheet(){
   fetch(CFG.scriptUrl).then(function(res){ return res.json(); })
   .then(function(rows){
     if(!Array.isArray(rows)||rows.length<2){ toastMsg('tst','Sheet khaali hai ya format match nahi hua','te'); return; }
+    
     var newG=[];
     for(var i=1;i<rows.length;i++){
       var r=rows[i];
       if(!r[0])continue;
+
+      // Extract Drive links cleanly if present
+      var rawFront = String(r[11] || '');
+      var rawBack = String(r[12] || '');
+
+      // Correct Google Sheet Index mapping to prevent state/time offset
+      var cleanState = String(r[7] || r[8] || '-').replace(/https?:\/\/[^\s]+/g, '').trim();
+      if(cleanState.indexOf('1899-') !== -1 || cleanState.indexOf('202') !== -1) {
+        cleanState = r[7] && r[7].length < 30 ? r[7] : 'N/A';
+      }
+
       newG.push({
         sNo: r[0],
         ciDate: r[1],
@@ -743,12 +773,12 @@ function loadFromSheet(){
         aadhaar: r[4],
         mobile: r[5],
         room: r[6],
-        state: r[8], 
-        coDate: r[9],
+        state: cleanState, 
+        coDate: r[8] || r[9],
         coTime: r[10],
-        photoUrl: r[11] || '',
-        photoUrlBack: r[12] || '', 
-        status: r[9] ? 'checked-out' : 'checked-in',
+        photoUrl: rawFront,
+        photoUrlBack: rawBack, 
+        status: (r[8] || r[9]) ? 'checked-out' : 'checked-in',
         kiraya: ''
       });
     }
@@ -771,39 +801,59 @@ function renderGuests(){
   for(var k2=0;k2<G.length;k2++){ totalEarn+=(Number(G[k2].kiraya)||0); }
   document.getElementById('se').textContent='\u20b9'+totalEarn.toLocaleString('en-IN');
 
+  // Calculate visit counts per mobile number across the entire list
+  var visitCounts = {};
+  for(var v=0; v<G.length; v++){
+    var mob = G[v].mobile;
+    if(mob){ visitCounts[mob] = (visitCounts[mob] || 0) + 1; }
+  }
+
   var htmlParts=[];
   for(var idx=0;idx<G.length;idx++){
     var g=G[idx];
     var avatar;
     if(g.photoUrl && g.photoUrl.indexOf('data:')===0){
       avatar='<img class="gav" src="'+g.photoUrl+'" alt="Avatar"/>';
-    }else if(g.photoUrl){
-      avatar='<div class="gavp"><i class="ti ti-photo"></i></div>';
+    }else if(g.photoUrl && g.photoUrl.indexOf('http')===0){
+      avatar='<div class="gavp"><i class="ti ti-id"></i></div>';
     }else{
       avatar='<div class="gavp"><i class="ti ti-user"></i></div>';
     }
+
     var idKey=g.sNo||g.localId;
     var statusBdg = g.status==='checked-in' ? '<span class="bdg bin">Checked In</span>' : '<span class="bdg bout">Checked Out</span>';
-    var checkoutBtn = g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'"><i class="ti ti-door-exit" style="font-size:18px;"></i> Checkout Now</button>' : '';
+    var totalVisits = visitCounts[g.mobile] || 1;
+    var visitBdg = '<span class="bdg vcount"><i class="ti ti-history"></i> Visits: '+totalVisits+'</span>';
 
-    var photoLink=(g.photoUrl && g.photoUrl.indexOf('data:')!==0) ? '<a href="'+g.photoUrl+'" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><i class="ti ti-paperclip"></i> Front ID</a>' : '';
-    var photoLinkBack=(g.photoUrlBack && g.photoUrlBack.indexOf('data:')!==0) ? '<a href="'+g.photoUrlBack+'" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><i class="ti ti-paperclip"></i> Back ID</a>' : '';
+    var checkoutBtn = g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'"><i class="ti ti-door-exit" style="font-size:18px;"></i> Check Out Now</button>' : '';
+
+    // ID Links (Clickable Front & Back links, hiding raw drive text strings)
+    var photoLink = '';
+    if (g.photoUrl && g.photoUrl.length > 5) {
+      photoLink = '<a href="'+g.photoUrl+'" target="_blank"><i class="ti ti-id"></i> Front ID</a>';
+    }
+    var photoLinkBack = '';
+    if (g.photoUrlBack && g.photoUrlBack.length > 5) {
+      photoLinkBack = '<a href="'+g.photoUrlBack+'" target="_blank"><i class="ti ti-id"></i> Back ID</a>';
+    }
+
+    var checkInDisplay = formatDateTime12Hr(g.ciDate, g.ciTime);
+    var checkOutDisplay = formatDateTime12Hr(g.coDate, g.coTime);
 
     htmlParts.push(
       '<div class="gcard">' +
         '<div class="gtop">' +
           avatar +
           '<div class="gi">' +
-            '<div class="gn">'+(g.naam||'Guest')+' '+statusBdg+'</div>' +
-            '<div class="gm"><i class="ti ti-phone" style="font-size:11px;"></i> '+(g.mobile||'-')+' &nbsp;|&nbsp; <i class="ti ti-door" style="font-size:11px;"></i> Room: <b>'+(g.room||'-')+'</b></div>' +
-            '<div class="gm" style="color:#64748b; font-size:12px;">State: '+(g.state||'-')+'</div>' +
+            '<div class="gn">'+(g.naam||'Guest')+' '+statusBdg+' '+visitBdg+'</div>' +
+            '<div class="gm"><i class="ti ti-phone" style="font-size:13px; color:#2563eb;"></i> '+(g.mobile||'-')+' &nbsp;|&nbsp; <i class="ti ti-door" style="font-size:13px; color:#2563eb;"></i> Room: <b>'+(g.room||'-')+'</b></div>' +
+            '<div class="gm" style="color:#64748b; font-size:12px;"><i class="ti ti-map-pin" style="font-size:13px;"></i> State: <b>'+(g.state || 'N/A')+'</b></div>' +
           '</div>' +
         '</div>' +
         '<div class="tinfo">' +
-          '<div><i class="ti ti-login"></i> In: '+g.ciDate+' '+g.ciTime+'</div>' +
-          (g.coDate ? '<div><i class="ti ti-logout"></i> Out: '+g.coDate+' '+g.coTime+'</div>' : '') +
-          (photoLink ? '<div>'+photoLink+'</div>' : '') +
-          (photoLinkBack ? '<div>'+photoLinkBack+'</div>' : '') +
+          '<div class="tinfo-row"><span><i class="ti ti-login"></i> Check In:</span> <span>'+checkInDisplay+'</span></div>' +
+          (g.status==='checked-out' ? '<div class="tinfo-row"><span><i class="ti ti-logout"></i> Check Out:</span> <span>'+checkOutDisplay+'</span></div>' : '') +
+          ((photoLink || photoLinkBack) ? '<div class="id-links">'+photoLink+' '+photoLinkBack+'</div>' : '') +
         '</div>' +
         checkoutBtn +
       '</div>'
