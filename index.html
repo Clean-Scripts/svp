@@ -3,22 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shree Vilas Palace Manager</title>
   <link rel="icon" type="image/x-icon" href="https://nishu-coder.github.io/vilas-palace/Logo.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
   <style>
-    /* Global Liquid Glass & High Readability Theme */
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans, system-ui, -apple-system, sans-serif); }
+    :root {
+      --bg-gradient: radial-gradient(circle at 10% 20%, rgba(196, 219, 254, 0.7) 0%, transparent 40%),
+                     radial-gradient(circle at 90% 80%, rgba(245, 208, 254, 0.7) 0%, transparent 40%),
+                     radial-gradient(circle at 50% 50%, rgba(254, 226, 226, 0.6) 0%, transparent 60%),
+                     linear-gradient(135deg, #e2e8f0, #f8fafc);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-glow: 0 10px 35px 0 rgba(31, 38, 135, 0.08);
+      --input-bg: rgba(255, 255, 255, 0.85);
+      --input-border: rgba(203, 213, 225, 0.85);
+      --card-title: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.25);
+      --btn-choice-bg: rgba(255, 255, 255, 0.85);
+      --btn-choice-border: rgba(203, 213, 225, 0.9);
+      --btn-choice-text: #334155;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: radial-gradient(circle at 15% 20%, rgba(30, 58, 138, 0.45) 0%, transparent 45%),
+                     radial-gradient(circle at 85% 80%, rgba(88, 28, 135, 0.45) 0%, transparent 45%),
+                     radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.9) 0%, transparent 70%),
+                     linear-gradient(135deg, #090d16, #0f172a);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-glow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+      --input-bg: rgba(30, 41, 59, 0.75);
+      --input-border: rgba(51, 65, 85, 0.9);
+      --card-title: #f8fafc;
+      --accent-blue: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.4);
+      --btn-choice-bg: rgba(30, 41, 59, 0.85);
+      --btn-choice-border: rgba(71, 85, 105, 0.8);
+      --btn-choice-text: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
 
     body {
-      background: radial-gradient(circle at 10% 20%, rgba(196, 219, 254, 0.6) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 80%, rgba(245, 208, 254, 0.6) 0%, transparent 40%),
-                  radial-gradient(circle at 50% 50%, rgba(254, 226, 226, 0.5) 0%, transparent 60%),
-                  linear-gradient(135deg, #e2e8f0, #f8fafc);
+      background: var(--bg-gradient);
       min-height: 100vh;
-      color: #0f172a;
+      color: var(--text-main);
       line-height: 1.4;
       padding-bottom: env(safe-area-inset-bottom);
+      transition: background 0.4s ease, color 0.3s ease;
     }
 
     .shell {
@@ -28,41 +66,64 @@
       padding: clamp(12px, 4vw, 24px);
     }
 
+    /* Header & Dark Mode Toggle */
     .hdr {
       text-align: center;
-      padding: 18px 0 14px;
+      padding: 16px 0 12px;
       position: relative;
     }
 
+    .theme-toggle {
+      position: absolute;
+      top: 14px;
+      right: 4px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: var(--glass-glow);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .theme-toggle:active { transform: scale(0.92); }
+
     .logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 10px;
-      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.4);
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
     }
     .logo img { width: 100%; height: 100%; object-fit: cover; }
-    .hdr h1 { font-size: clamp(20px, 5vw, 24px); font-weight: 700; letter-spacing: -0.5px; color: #1e293b; }
-    .hdr p { font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 500; }
+    .hdr h1 { font-size: clamp(20px, 5vw, 25px); font-weight: 800; letter-spacing: -0.5px; color: var(--card-title); }
+    .hdr p { font-size: 13px; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
 
-    /* Liquid Glass Navigation */
+    /* Navigation */
     .nav {
       display: flex;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
       border-radius: 20px;
       padding: 6px;
       gap: 6px;
       margin-bottom: 16px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+      box-shadow: var(--glass-glow);
     }
     .nav button {
       flex: 1;
@@ -73,7 +134,7 @@
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
-      color: #64748b;
+      color: var(--text-muted);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -85,29 +146,35 @@
     .nav button.on {
       background: rgba(255, 255, 255, 0.95);
       color: #2563eb;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+      box-shadow: 0 6px 20px var(--accent-glow);
       border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+    [data-theme="dark"] .nav button.on {
+      background: rgba(30, 41, 59, 0.95);
+      color: #60a5fa;
+      border-color: rgba(96, 165, 250, 0.3);
     }
 
     .pg { display: none; width: 100%; animation: fadeInPg 0.3s ease; }
     @keyframes fadeInPg { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Liquid Glass Cards */
+    /* Glass Cards */
     .card {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 20px;
-      padding: clamp(14px, 4vw, 20px);
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: clamp(16px, 4vw, 22px);
       margin-bottom: 14px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+      box-shadow: var(--glass-glow);
+      position: relative;
     }
 
     .lbl {
       font-size: 11px;
       font-weight: 700;
-      color: #64748b;
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 12px;
@@ -123,15 +190,15 @@
       margin-bottom: 4px;
     }
 
-    .f { display: flex; flex-direction: column; gap: 5px; }
-    .f label { font-size: 12px; font-weight: 600; color: #475569; }
+    .f { display: flex; flex-direction: column; gap: 6px; }
+    .f label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
     .f input, .f select {
       padding: 13px 14px;
-      border: 1px solid rgba(203, 213, 225, 0.8);
+      border: 1px solid var(--input-border);
       border-radius: 12px;
       font-size: 15px;
-      background: rgba(255, 255, 255, 0.85);
-      color: #0f172a;
+      background: var(--input-bg);
+      color: var(--text-main);
       width: 100%;
       appearance: none;
       -webkit-appearance: none;
@@ -139,9 +206,8 @@
     }
     .f input:focus, .f select:focus {
       outline: none;
-      border-color: #3b82f6;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 4px var(--accent-glow);
     }
 
     .clock {
@@ -150,56 +216,104 @@
       gap: 8px;
       padding: 10px 16px;
       border-radius: 12px;
-      background: rgba(239, 246, 255, 0.85);
-      border: 1px solid rgba(191, 219, 254, 0.7);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
       font-size: 15px;
       font-weight: 600;
-      color: #1d4ed8;
+      color: var(--accent-blue);
     }
 
-    .upbox {
-      border: 2px dashed rgba(59, 130, 246, 0.4);
-      border-radius: 14px;
-      padding: 22px 14px;
-      text-align: center;
+    /* Enhanced Upload Container with 2 Choice Buttons */
+    .upload-card-box {
+      border: 1.5px dashed rgba(59, 130, 246, 0.4);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(59, 130, 246, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .upload-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .upload-header i { color: var(--accent-blue); font-size: 17px; }
+
+    .upload-choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .btn-choice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 8px;
+      border-radius: 10px;
+      background: var(--btn-choice-bg);
+      border: 1px solid var(--btn-choice-border);
+      color: var(--btn-choice-text);
+      font-size: 12.5px;
+      font-weight: 600;
       cursor: pointer;
-      background: rgba(239, 246, 255, 0.4);
       transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .upbox:active { background: rgba(239, 246, 255, 0.8); }
-    .upbox .t { font-size: 14px; font-weight: 600; color: #1d4ed8; }
-    .upbox .s { font-size: 12px; color: #64748b; margin-top: 4px; }
+    .btn-choice:active {
+      transform: scale(0.97);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+    .btn-choice i { font-size: 16px; color: var(--accent-blue); }
 
     .preview {
       display: none;
       align-items: center;
       gap: 12px;
       padding: 10px;
-      background: rgba(240, 253, 244, 0.8);
-      border: 1px solid rgba(187, 247, 208, 0.8);
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.35);
       border-radius: 12px;
-      margin-top: 10px;
+      margin-top: 6px;
+      position: relative;
     }
-    .preview img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; }
+    .preview img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; }
+    .remove-file-btn {
+      margin-left: auto;
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
     /* Action Buttons */
     .btn-main {
       width: 100%;
       padding: 16px;
       border: none;
-      border-radius: 14px;
+      border-radius: 16px;
       background: linear-gradient(135deg, #3b82f6, #6366f1);
       color: #fff;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
       transition: transform 0.1s ease, opacity 0.2s;
       -webkit-tap-highlight-color: transparent;
     }
@@ -209,11 +323,10 @@
     .btn-secondary {
       width: 100%;
       padding: 14px;
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border: 1px solid rgba(59, 130, 246, 0.35);
       border-radius: 14px;
-      background: rgba(239, 246, 255, 0.7);
-      backdrop-filter: blur(10px);
-      color: #1d4ed8;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-blue);
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
@@ -221,11 +334,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Stats Grid */
+    /* Stats */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -233,62 +345,64 @@
       margin-bottom: 14px;
     }
     .stat {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
       border-radius: 16px;
       padding: 14px 8px;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      box-shadow: var(--glass-glow);
     }
-    .stat .n { font-size: clamp(18px, 5vw, 22px); font-weight: 700; color: #0f172a; }
-    .stat .l { font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-top: 3px; letter-spacing: 0.5px; }
+    .stat .n { font-size: clamp(18px, 5vw, 22px); font-weight: 800; color: var(--text-main); }
+    .stat .l { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 3px; letter-spacing: 0.5px; }
 
-    /* Guest Item Card Layout */
+    /* Guest Card */
     .gcard {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      margin-bottom: 14px;
+      box-shadow: var(--glass-glow);
     }
     .gtop { display: flex; align-items: flex-start; gap: 14px; }
-    .gav { width: 52px; height: 52px; border-radius: 14px; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.9); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .gavp { width: 52px; height: 52px; border-radius: 14px; background: rgba(239, 246, 255, 0.95); display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 22px; border: 1px solid rgba(191, 219, 254, 0.8); }
+    .gav { width: 54px; height: 54px; border-radius: 14px; object-fit: cover; border: 1.5px solid var(--glass-border); }
+    .gavp { width: 54px; height: 54px; border-radius: 14px; background: rgba(59, 130, 246, 0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); font-size: 24px; border: 1px solid rgba(59, 130, 246, 0.25); }
     .gi { flex: 1; min-width: 0; font-size: 13px; }
-    .gn { font-weight: 700; font-size: 16px; color: #0f172a; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 2px; }
-    .gm { font-size: 13px; color: #334155; margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .gn { font-weight: 700; font-size: 16px; color: var(--text-main); display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 3px; }
+    .gm { font-size: 13px; color: var(--text-muted); margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     
-    .bdg { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 700; letter-spacing: 0.3px; }
-    .bin { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-    .bout { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-    .vcount { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .bdg { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
+    .bin { background: rgba(34, 197, 94, 0.15); color: #16a34a; border: 1px solid rgba(34, 197, 94, 0.35); }
+    .bout { background: rgba(239, 68, 68, 0.15); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.35); }
+    .vcount { background: rgba(99, 102, 241, 0.15); color: #6366f1; border: 1px solid rgba(99, 102, 241, 0.3); }
 
     .tinfo {
       margin-top: 12px;
       padding: 12px;
-      background: rgba(254, 243, 199, 0.55);
-      border: 1px solid rgba(253, 230, 138, 0.8);
-      border-radius: 12px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 14px;
       font-size: 12px;
-      color: #78350f;
+      color: #d97706;
       display: flex;
       flex-direction: column;
       gap: 6px;
       font-weight: 600;
     }
+    [data-theme="dark"] .tinfo { color: #fcd34d; background: rgba(245, 158, 11, 0.08); }
     .tinfo-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
-    .id-links { display: flex; gap: 12px; margin-top: 4px; padding-top: 6px; border-top: 1px dashed rgba(245, 158, 11, 0.3); }
-    .id-links a { color: #2563eb; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; background: rgba(255, 255, 255, 0.6); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(191, 219, 254, 0.8); }
+    .id-links { display: flex; gap: 10px; margin-top: 4px; padding-top: 8px; border-top: 1px dashed rgba(245, 158, 11, 0.3); }
+    .id-links a { color: var(--accent-blue); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; background: var(--glass-bg); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--glass-border); }
 
-    /* Easy Touch Checkout Button */
     .abtn {
       width: 100%;
       margin-top: 12px;
       padding: 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 15px;
       border: none;
       cursor: pointer;
@@ -297,7 +411,6 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      -webkit-tap-highlight-color: transparent;
       transition: transform 0.1s ease;
     }
     .abtn:active { transform: scale(0.98); }
@@ -306,6 +419,11 @@
       color: #78350f;
       border: 1px solid rgba(245, 158, 11, 0.5);
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    }
+    [data-theme="dark"] .bco {
+      background: linear-gradient(135deg, #78350f, #92400e);
+      color: #fef3c7;
+      border-color: #b45309;
     }
 
     /* Toasts */
@@ -318,14 +436,17 @@
       display: none;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--glass-glow);
     }
-    .ts { background: rgba(220, 252, 231, 0.95); color: #166534; border: 1px solid rgba(187, 247, 208, 0.9); }
-    .te { background: rgba(254, 226, 226, 0.95); color: #991b1b; border: 1px solid rgba(254, 202, 202, 0.9); }
-    .tinf { background: rgba(239, 246, 255, 0.95); color: #1e40af; border: 1px solid rgba(191, 219, 254, 0.9); }
+    .ts { background: rgba(34, 197, 94, 0.2); color: #15803d; border: 1px solid rgba(34, 197, 94, 0.4); }
+    [data-theme="dark"] .ts { color: #86efac; }
+    .te { background: rgba(239, 68, 68, 0.2); color: #b91c1c; border: 1px solid rgba(239, 68, 68, 0.4); }
+    [data-theme="dark"] .te { color: #fca5a5; }
+    .tinf { background: rgba(59, 130, 246, 0.2); color: #1d4ed8; border: 1px solid rgba(59, 130, 246, 0.4); }
+    [data-theme="dark"] .tinf { color: #93c5fd; }
 
-    /* Footer & Liquid Glass QR Toggle Styles */
+    /* Footer & QR */
     .footer {
       width: 100%;
       display: flex;
@@ -335,19 +456,17 @@
       padding: 16px 0 6px;
       margin-top: 16px;
     }
-
     .glass-qr-toggle {
       display: flex;
-      background: rgba(255, 255, 255, 0.55);
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--glass-border);
       border-radius: 30px;
       padding: 5px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
       gap: 6px;
+      box-shadow: var(--glass-glow);
     }
-
     .qr-toggle-btn {
       padding: 8px 16px;
       border: none;
@@ -355,50 +474,42 @@
       border-radius: 20px;
       font-size: 11px;
       font-weight: 700;
-      color: #64748b;
+      color: var(--text-muted);
       cursor: pointer;
       transition: all 0.3s ease;
-      -webkit-tap-highlight-color: transparent;
     }
-
     .qr-toggle-btn.active {
       background: rgba(255, 255, 255, 0.95);
       color: #2563eb;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-
-    .qr-code-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
+    [data-theme="dark"] .qr-toggle-btn.active {
+      background: rgba(30, 41, 59, 0.95);
+      color: #60a5fa;
     }
-
     .qr-code-section {
       width: 100%;
       max-width: 190px;
       display: none;
       justify-content: center;
       padding: 10px;
-      background: rgba(255, 255, 255, 0.85);
+      background: var(--glass-bg);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--glass-border);
       border-radius: 18px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-      animation: fadeIn 0.3s ease-in-out;
+      box-shadow: var(--glass-glow);
     }
-
     .qr-code-section.active { display: flex; }
     .qr-code { width: 100%; height: auto; display: block; border-radius: 10px; object-fit: contain; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
+
 <div class="shell">
   <div class="hdr">
+    <button type="button" class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
+      <i class="ti ti-moon" id="themeIcon"></i>
+    </button>
     <div class="logo"><img src="https://nishu-coder.github.io/vilas-palace/Logo.png" alt="Logo"></div>
     <h1>Shree Vilas Palace Manager</h1>
     <p>Check-In / Check-Out Records</p>
@@ -409,18 +520,21 @@
     <button type="button" id="navRc"><i class="ti ti-users"></i>Guests</button>
   </div>
 
+  <!-- CHECK IN PAGE -->
   <div id="ci" class="pg" style="display:block">
     <div id="tst" class="toast"></div>
+    
     <div class="card">
       <div class="lbl">Current Time & Date</div>
       <div class="clock"><i class="ti ti-clock"></i><span id="clk">--</span></div>
     </div>
+
     <div class="card">
       <div class="lbl">Guest Details</div>
       <div class="row">
-        <div class="f"><label>Name</label><input id="fn" placeholder="Name"/></div>
-        <div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="+91 "/></div>
-        <div class="f"><label>Room No.</label><input id="fr" placeholder="101"/></div>
+        <div class="f"><label>Name</label><input id="fn" placeholder="Guest Full Name"/></div>
+        <div class="f"><label>Mobile</label><input id="fm" maxlength="10" placeholder="10 Digit Number"/></div>
+        <div class="f"><label>Room No.</label><input id="fr" placeholder="e.g. 101"/></div>
         <div class="f"><label>State</label>
           <select id="fst">
             <option value="">Select State</option>
@@ -452,33 +566,65 @@
             <option value="Uttar Pradesh">Uttar Pradesh</option>
             <option value="Uttarakhand">Uttarakhand</option>
             <option value="West Bengal">West Bengal</option>
-            <option value="Andaman & Nicobar">Andaman & Nicobar Islands</option>
-            <option value="Chandigarh">Chandigarh</option>
-            <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman & Diu</option>
             <option value="Delhi">Delhi (NCT)</option>
-            <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-            <option value="Ladakh">Ladakh</option>
-            <option value="Lakshadweep">Lakshadweep</option>
-            <option value="Puducherry">Puducherry</option>
+            <option value="Other">Other</option>
           </select>
         </div>
-        <div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit"/></div>
+        <div class="f"><label>Aadhaar Number</label><input id="fa" maxlength="12" placeholder="12 digit number"/></div>
       </div>
     </div>
     
+    <!-- ID Proof Section with 2 Options (Camera vs Gallery) -->
     <div class="card">
       <div class="lbl">ID Proof (Aadhaar Card)</div>
       <div class="row">
+        
+        <!-- FRONT SIDE -->
         <div class="f">
-          <div class="upbox" id="upboxFront"><div class="t">Aadhaar Front Capture</div><div class="s">Camera or Gallery</div></div>
-          <input type="file" id="fpFront" accept="image/*" capture="environment" style="display:none"/>
-          <div id="ppFront" class="preview"><img id="pimFront" alt="Front Preview"/><div id="pnameFront" style="font-size:11px; color:#166534; font-weight:600;"></div></div>
+          <div class="upload-card-box">
+            <div class="upload-header"><i class="ti ti-id"></i> Front Side</div>
+            
+            <div class="upload-choice-grid">
+              <button type="button" class="btn-choice" id="btnCamFront"><i class="ti ti-camera"></i> Camera</button>
+              <button type="button" class="btn-choice" id="btnGalFront"><i class="ti ti-photo"></i> Files / Gallery</button>
+            </div>
+
+            <!-- Native Input: Direct Camera -->
+            <input type="file" id="fpFrontCam" accept="image/*" capture="environment" style="display:none"/>
+            <!-- Native Input: Gallery / Files without capture lock -->
+            <input type="file" id="fpFrontGal" accept="image/*" style="display:none"/>
+
+            <div id="ppFront" class="preview">
+              <img id="pimFront" alt="Front Preview"/>
+              <div id="pnameFront" style="font-size:11px; color:#16a34a; font-weight:700;"></div>
+              <button type="button" class="remove-file-btn" id="rmFront" title="Remove"><i class="ti ti-x"></i></button>
+            </div>
+          </div>
         </div>
+
+        <!-- BACK SIDE -->
         <div class="f">
-          <div class="upbox" id="upboxBack"><div class="t">Aadhaar Back Capture</div><div class="s">Camera or Gallery</div></div>
-          <input type="file" id="fpBack" accept="image/*" capture="environment" style="display:none"/>
-          <div id="ppBack" class="preview"><img id="pimBack" alt="Back Preview"/><div id="pnameBack" style="font-size:11px; color:#166534; font-weight:600;"></div></div>
+          <div class="upload-card-box">
+            <div class="upload-header"><i class="ti ti-id"></i> Back Side</div>
+            
+            <div class="upload-choice-grid">
+              <button type="button" class="btn-choice" id="btnCamBack"><i class="ti ti-camera"></i> Camera</button>
+              <button type="button" class="btn-choice" id="btnGalBack"><i class="ti ti-photo"></i> Files / Gallery</button>
+            </div>
+
+            <!-- Native Input: Direct Camera -->
+            <input type="file" id="fpBackCam" accept="image/*" capture="environment" style="display:none"/>
+            <!-- Native Input: Gallery / Files without capture lock -->
+            <input type="file" id="fpBackGal" accept="image/*" style="display:none"/>
+
+            <div id="ppBack" class="preview">
+              <img id="pimBack" alt="Back Preview"/>
+              <div id="pnameBack" style="font-size:11px; color:#16a34a; font-weight:700;"></div>
+              <button type="button" class="remove-file-btn" id="rmBack" title="Remove"><i class="ti ti-x"></i></button>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
     
@@ -500,6 +646,7 @@
     </div>
   </div>
 
+  <!-- GUESTS LIST PAGE -->
   <div id="rc" class="pg">
     <div class="stats" id="statsRow">
       <div class="stat"><div class="n" id="st">0</div><div class="l">Total</div></div>
@@ -512,81 +659,144 @@
 </div>
 
 <script>
-var G=[];
-var CFG={
+var G = [];
+var CFG = {
   scriptUrl: "https://script.google.com/macros/s/AKfycbwry70HoYifxw1x-zgwjU1Kp2LLa5y7LoQJCG2plgWc3Twake7e7gPNkxJ1MaDKKnMi/exec"
 };
-try{G=JSON.parse(localStorage.getItem('svp_guests')||'[]');}catch(e){G=[];}
-var pBase64Front=null;
-var pBase64Back=null;
+try { G = JSON.parse(localStorage.getItem('svp_guests') || '[]'); } catch(e) { G = []; }
+var pBase64Front = null;
+var pBase64Back = null;
 
-/* Clean 12-Hour Date-Time Formatter */
+/* ---------------- Theme Toggle System ---------------- */
+var currentTheme = localStorage.getItem('svp_theme') || 'light';
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('svp_theme', theme);
+  var icon = document.getElementById('themeIcon');
+  if (icon) {
+    icon.className = theme === 'dark' ? 'ti ti-sun' : 'ti ti-moon';
+  }
+}
+applyTheme(currentTheme);
+document.getElementById('themeToggle').onclick = function() {
+  applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+};
+
+/* ---------------- File Processing & Compression ---------------- */
+function handleFileSelection(file, targetSide) {
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var rawData = e.target.result;
+    
+    // Create image for downscaling to ensure fast Google Sheet uploads
+    var img = new Image();
+    img.onload = function() {
+      var canvas = document.createElement('canvas');
+      var maxDim = 1200;
+      var w = img.width;
+      var h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+        else { w = Math.round((w * maxDim) / h); h = maxDim; }
+      }
+      canvas.width = w;
+      canvas.height = h;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      var optimizedData = canvas.toDataURL('image/jpeg', 0.82);
+
+      if (targetSide === 'front') {
+        pBase64Front = optimizedData;
+        document.getElementById('pimFront').src = optimizedData;
+        document.getElementById('pnameFront').textContent = file.name.substring(0, 18) + '...';
+        document.getElementById('ppFront').style.display = 'flex';
+      } else {
+        pBase64Back = optimizedData;
+        document.getElementById('pimBack').src = optimizedData;
+        document.getElementById('pnameBack').textContent = file.name.substring(0, 18) + '...';
+        document.getElementById('ppBack').style.display = 'flex';
+      }
+    };
+    img.src = rawData;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Front Bindings
+document.getElementById('btnCamFront').onclick = function() { document.getElementById('fpFrontCam').click(); };
+document.getElementById('btnGalFront').onclick = function() { document.getElementById('fpFrontGal').click(); };
+document.getElementById('fpFrontCam').onchange = function(e) { handleFileSelection(e.target.files[0], 'front'); };
+document.getElementById('fpFrontGal').onchange = function(e) { handleFileSelection(e.target.files[0], 'front'); };
+document.getElementById('rmFront').onclick = function() {
+  pBase64Front = null;
+  document.getElementById('fpFrontCam').value = '';
+  document.getElementById('fpFrontGal').value = '';
+  document.getElementById('ppFront').style.display = 'none';
+};
+
+// Back Bindings
+document.getElementById('btnCamBack').onclick = function() { document.getElementById('fpBackCam').click(); };
+document.getElementById('btnGalBack').onclick = function() { document.getElementById('fpBackGal').click(); };
+document.getElementById('fpBackCam').onchange = function(e) { handleFileSelection(e.target.files[0], 'back'); };
+document.getElementById('fpBackGal').onchange = function(e) { handleFileSelection(e.target.files[0], 'back'); };
+document.getElementById('rmBack').onclick = function() {
+  pBase64Back = null;
+  document.getElementById('fpBackCam').value = '';
+  document.getElementById('fpBackGal').value = '';
+  document.getElementById('ppBack').style.display = 'none';
+};
+
+/* ---------------- Date & Clock ---------------- */
 function formatDateTime12Hr(dateStr, timeStr) {
   if (!dateStr && !timeStr) return '-';
-  var rawStr = (String(dateStr || '') + ' ' + String(timeStr || '')).trim();
-  
-  // Strip out embedded URLs if any
-  rawStr = rawStr.replace(/https?:\/\/[^\s]+/g, '').trim();
-
-  // Handle ISO formatted timestamp string
+  var rawStr = (String(dateStr || '') + ' ' + String(timeStr || '')).trim().replace(/https?:\/\/[^\s]+/g, '').trim();
   var isoMatch = rawStr.match(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?)/);
   if (isoMatch) {
     var d = new Date(isoMatch[1]);
     if (!isNaN(d.getTime())) {
-      var dateFormatted = d.toLocaleDateString('en-GB'); // DD/MM/YYYY
-      var timeFormatted = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-      return dateFormatted + ' at ' + timeFormatted;
+      return d.toLocaleDateString('en-GB') + ' at ' + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
     }
   }
-
-  // Fallback for standard date + time strings
-  if (dateStr && timeStr) {
-    return dateStr + ' at ' + timeStr;
-  }
-  return rawStr || '-';
+  return (dateStr && timeStr) ? (dateStr + ' at ' + timeStr) : (rawStr || '-');
 }
 
-function nowInfo(){
-  var n=new Date();
-  return{
+function nowInfo() {
+  var n = new Date();
+  return {
     date: n.toLocaleDateString('en-GB'),
     time: n.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
   };
 }
 
-function tickClock(){
-  var el=document.getElementById('clk');
-  if(el){ var ni=nowInfo(); el.textContent=ni.date+' \u00b7 '+ni.time; }
+function tickClock() {
+  var el = document.getElementById('clk');
+  if (el) { var ni = nowInfo(); el.textContent = ni.date + ' \u00b7 ' + ni.time; }
 }
 tickClock();
-setInterval(tickClock,1000);
+setInterval(tickClock, 1000);
 
-function showPage(id){
-  var pages=document.querySelectorAll('.pg');
-  for(var i=0;i<pages.length;i++){ pages[i].style.display='none'; }
-  var btns=document.querySelectorAll('.nav button');
-  for(var j=0;j<btns.length;j++){ btns[j].classList.remove('on'); }
-  var pg=document.getElementById(id);
-  if(pg){ pg.style.display='block'; }
+/* ---------------- Navigation & Tabs ---------------- */
+function showPage(id) {
+  var pages = document.querySelectorAll('.pg');
+  for (var i = 0; i < pages.length; i++) pages[i].style.display = 'none';
+  var btns = document.querySelectorAll('.nav button');
+  for (var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+  var pg = document.getElementById(id);
+  if (pg) pg.style.display = 'block';
 }
 
-document.getElementById('navCi').onclick=function(){
-  showPage('ci');
-  this.classList.add('on');
-};
-document.getElementById('navRc').onclick=function(){
-  showPage('rc');
-  this.classList.add('on');
-  renderGuests();
-};
+document.getElementById('navCi').onclick = function() { showPage('ci'); this.classList.add('on'); };
+document.getElementById('navRc').onclick = function() { showPage('rc'); this.classList.add('on'); renderGuests(); };
 
-function switchQr(qrType){
+/* ---------------- QR Switcher ---------------- */
+function switchQr(qrType) {
   var btnSvp = document.getElementById('btnQrSvp');
   var btnSandeep = document.getElementById('btnQrSandeep');
   var secSvp = document.getElementById('qrSecSvp');
   var secSandeep = document.getElementById('qrSecSandeep');
-
-  if(qrType === 'sandeep'){
+  if (qrType === 'sandeep') {
     btnSvp.classList.remove('active');
     btnSandeep.classList.add('active');
     secSvp.classList.remove('active');
@@ -600,241 +810,228 @@ function switchQr(qrType){
     localStorage.setItem('svp_active_qr', 'svp');
   }
 }
+document.getElementById('btnQrSvp').onclick = function() { switchQr('svp'); };
+document.getElementById('btnQrSandeep').onclick = function() { switchQr('sandeep'); };
+switchQr(localStorage.getItem('svp_active_qr') || 'svp');
 
-document.getElementById('btnQrSvp').onclick = function(){ switchQr('svp'); };
-document.getElementById('btnQrSandeep').onclick = function(){ switchQr('sandeep'); };
-var savedQr = localStorage.getItem('svp_active_qr') || 'svp';
-switchQr(savedQr);
+/* ---------------- Toast Messenger ---------------- */
+function toastMsg(elId, msg, type) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  el.className = 'toast ' + type;
+  var icon = type === 'ts' ? 'circle-check' : (type === 'te' ? 'alert-triangle' : 'info-circle');
+  el.innerHTML = '<i class="ti ti-' + icon + '" style="font-size:18px;"></i> <span>' + msg + '</span>';
+  el.style.display = 'flex';
+  setTimeout(function() { el.style.display = 'none'; }, 6000);
+}
 
+/* ---------------- Repeat Guest Lookup ---------------- */
 document.getElementById('fm').oninput = function() {
   var mobileVal = this.value.trim();
   if (mobileVal.length === 10) {
-    var pastVisits = G.filter(function(item) {
-      return item.mobile === mobileVal;
-    });
+    var pastVisits = G.filter(function(item) { return item.mobile === mobileVal; });
     if (pastVisits.length > 0) {
       var lastVisit = pastVisits[0];
-      toastMsg('tst', '⚠️ Repeat Customer! Yeh pehle ' + pastVisits.length + ' baar aa chuke hain. (Last Room: ' + lastVisit.room + ')', 'ts');
+      toastMsg('tst', '⚠️ Repeat Guest: Pehle ' + pastVisits.length + ' baar aa chuke hain. (Last Room: ' + lastVisit.room + ')', 'ts');
       var nameInput = document.getElementById('fn');
-      if (!nameInput.value) { nameInput.value = lastVisit.naam; }
+      if (!nameInput.value) nameInput.value = lastVisit.naam;
       var stateSelect = document.getElementById('fst');
-      if (!stateSelect.value && lastVisit.state) { stateSelect.value = lastVisit.state; }
+      if (!stateSelect.value && lastVisit.state) stateSelect.value = lastVisit.state;
     }
   }
 };
 
-document.getElementById('upboxFront').onclick=function(){ document.getElementById('fpFront').click(); };
-document.getElementById('fpFront').onchange=function(e){
-  var f=e.target.files[0];
-  if(!f)return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    pBase64Front=ev.target.result;
-    document.getElementById('pimFront').src=pBase64Front;
-    document.getElementById('pnameFront').textContent=f.name+' ('+Math.round(f.size/1024)+' KB)';
-    document.getElementById('ppFront').style.display='flex';
-  };
-  r.readAsDataURL(f);
-};
+/* ---------------- Save & Check-In ---------------- */
+document.getElementById('saveBtn').onclick = function() { saveGuest(); };
 
-document.getElementById('upboxBack').onclick=function(){ document.getElementById('fpBack').click(); };
-document.getElementById('fpBack').onchange=function(e){
-  var f=e.target.files[0];
-  if(!f)return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    pBase64Back=ev.target.result;
-    document.getElementById('pimBack').src=pBase64Back;
-    document.getElementById('pnameBack').textContent=f.name+' ('+Math.round(f.size/1024)+' KB)';
-    document.getElementById('ppBack').style.display='flex';
-  };
-  r.readAsDataURL(f);
-};
+function saveGuest() {
+  var naam = document.getElementById('fn').value.trim();
+  var mobile = document.getElementById('fm').value.trim();
+  var room = document.getElementById('fr').value.trim();
+  if (!naam || !mobile || !room) {
+    toastMsg('tst', 'Name, Mobile aur Room zaroori hai', 'te');
+    return;
+  }
 
-function toastMsg(elId,msg,type){
-  var el=document.getElementById(elId);
-  if(!el)return;
-  el.className='toast '+type;
-  var icon=type==='ts'?'circle-check':(type==='te'?'alert-triangle':'info-circle');
-  el.innerHTML='<i class="ti ti-'+icon+'" style="font-size:18px;"></i> <span>'+msg+'</span>';
-  el.style.display='flex';
-  setTimeout(function(){el.style.display='none';},6000);
-}
+  var btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2"></i> Saving...';
+  toastMsg('tst', 'Save ho raha hai...', 'tinf');
 
-document.getElementById('saveBtn').onclick=function(){ saveGuest(); };
-
-function saveGuest(){
-  var naam=document.getElementById('fn').value.trim();
-  var mobile=document.getElementById('fm').value.trim();
-  var room=document.getElementById('fr').value.trim();
-  if(!naam||!mobile||!room){ toastMsg('tst','Name, Mobile, Room zaroori hai','te'); return; }
-
-  var btn=document.getElementById('saveBtn');
-  btn.disabled=true;
-  btn.innerHTML='<i class="ti ti-loader-2"></i> Saving...';
-  toastMsg('tst','Save ho raha hai...','tinf');
-
-  var ni=nowInfo();
-  var g={
-    localId:'G'+Date.now(),
-    naam:naam, mobile:mobile, room:room,
-    state:document.getElementById('fst').value.trim(),
+  var ni = nowInfo();
+  var g = {
+    localId: 'G' + Date.now(),
+    naam: naam,
+    mobile: mobile,
+    room: room,
+    state: document.getElementById('fst').value.trim(),
     aadhaar: document.getElementById('fa').value.trim(),
-    kiraya:'',
-    photoUrl:pBase64Front,
-    photoUrlBack:pBase64Back,
-    ciDate:ni.date, ciTime:ni.time,
-    coDate:'', coTime:'',
-    sNo:'',
-    status:'checked-in'
+    kiraya: '',
+    photoUrl: pBase64Front,
+    photoUrlBack: pBase64Back,
+    ciDate: ni.date,
+    ciTime: ni.time,
+    coDate: '',
+    coTime: '',
+    sNo: '',
+    status: 'checked-in'
   };
 
-  function finishSave(){
+  function finishSave() {
     G.unshift(g);
     localStorage.setItem('svp_guests', JSON.stringify(G));
     var ids = ['fn', 'fm', 'fr', 'fa'];
-    for(var i=0; i<ids.length; i++){ 
-      if(document.getElementById(ids[i])) document.getElementById(ids[i]).value = ''; 
+    for (var i = 0; i < ids.length; i++) {
+      if (document.getElementById(ids[i])) document.getElementById(ids[i]).value = '';
     }
-    if(document.getElementById('fst')) document.getElementById('fst').selectedIndex = 0;
-    pBase64Front = null; pBase64Back = null;
-    if(document.getElementById('fpFront')) document.getElementById('fpFront').value = '';
-    if(document.getElementById('fpBack')) document.getElementById('fpBack').value = '';
-    if(document.getElementById('ppFront')) document.getElementById('ppFront').style.display = 'none';
-    if(document.getElementById('ppBack')) document.getElementById('ppBack').style.display = 'none';
+    if (document.getElementById('fst')) document.getElementById('fst').selectedIndex = 0;
+    pBase64Front = null;
+    pBase64Back = null;
+    document.getElementById('fpFrontCam').value = '';
+    document.getElementById('fpFrontGal').value = '';
+    document.getElementById('fpBackCam').value = '';
+    document.getElementById('fpBackGal').value = '';
+    document.getElementById('ppFront').style.display = 'none';
+    document.getElementById('ppBack').style.display = 'none';
     btn.disabled = false;
     btn.innerHTML = '<i class="ti ti-check"></i>Check-In Save';
   }
 
-  if(CFG.scriptUrl){
-    var payload={
-      action:'add', naam:g.naam, mobile:g.mobile, room:g.room,
-      state:g.state, aadhaar:g.aadhaar,
-      ciDate:g.ciDate, ciTime:g.ciTime
+  if (CFG.scriptUrl) {
+    var payload = {
+      action: 'add',
+      naam: g.naam,
+      mobile: g.mobile,
+      room: g.room,
+      state: g.state,
+      aadhaar: g.aadhaar,
+      ciDate: g.ciDate,
+      ciTime: g.ciTime
     };
-    if(pBase64Front){ payload.photoBase64 = pBase64Front; }
-    if(pBase64Back){ payload.photoBase64Back = pBase64Back; }
+    if (pBase64Front) payload.photoBase64 = pBase64Front;
+    if (pBase64Back) payload.photoBase64Back = pBase64Back;
 
-    fetch(CFG.scriptUrl,{
-      method:'POST',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify(payload)
-    }).then(function(res){ return res.json(); })
-    .then(function(data){
-      if(data.ok){
-        g.sNo=data.sNo;
-        g.photoUrl=data.photoUrl||g.photoUrl;
-        g.photoUrlBack=data.photoUrlBack||g.photoUrlBack;
+    fetch(CFG.scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        g.sNo = data.sNo;
+        g.photoUrl = data.photoUrl || g.photoUrl;
+        g.photoUrlBack = data.photoUrlBack || g.photoUrlBack;
         var visitText = data.visitCount ? ' (Total Visits: ' + data.visitCount + ')' : '';
-        toastMsg('tst',naam+' Google Sheet mein save ho gaya! S.No: '+data.sNo + visitText,'ts');
-      }else{
-        toastMsg('tst','Sheet error: '+(data.error||'unknown')+' — local mein save kiya','te');
+        toastMsg('tst', naam + ' Google Sheet me save ho gaya! S.No: ' + data.sNo + visitText, 'ts');
+      } else {
+        toastMsg('tst', 'Sheet error: ' + (data.error || 'unknown') + ' — Local me save kiya gaya', 'te');
       }
       finishSave();
-    }).catch(function(err){
-      toastMsg('tst','Sheet se connect nahi hua — local mein save kiya','te');
+    })
+    .catch(function(err) {
+      toastMsg('tst', 'Sheet connect nahi hua — Local me save kiya gaya', 'te');
       finishSave();
     });
-  }else{
-    toastMsg('tst',naam+' local mein save ho gaya.','tinf');
+  } else {
+    toastMsg('tst', naam + ' local me save ho gaya.', 'tinf');
     finishSave();
   }
 }
 
-document.getElementById('refreshBtn').onclick=function(){ loadFromSheet(); };
+/* ---------------- Load from Google Sheet ---------------- */
+document.getElementById('refreshBtn').onclick = function() { loadFromSheet(); };
 
-function loadFromSheet(){
-  if(!CFG.scriptUrl){ toastMsg('tst','Sheet abhi connect nahi hai','te'); return; }
-  toastMsg('tst','Sheet se data load ho raha hai...','tinf');
-  fetch(CFG.scriptUrl).then(function(res){ return res.json(); })
-  .then(function(rows){
-    if(!Array.isArray(rows)||rows.length<2){ toastMsg('tst','Sheet khaali hai ya format match nahi hua','te'); return; }
-    
-    var newG=[];
-    for(var i=1;i<rows.length;i++){
-      var r=rows[i];
-      if(!r[0])continue;
-
-      // Extract Drive links cleanly if present
-      var rawFront = String(r[11] || '');
-      var rawBack = String(r[12] || '');
-
-      // Correct Google Sheet Index mapping to prevent state/time offset
-      var cleanState = String(r[7] || r[8] || '-').replace(/https?:\/\/[^\s]+/g, '').trim();
-      if(cleanState.indexOf('1899-') !== -1 || cleanState.indexOf('202') !== -1) {
-        cleanState = r[7] && r[7].length < 30 ? r[7] : 'N/A';
+function loadFromSheet() {
+  if (!CFG.scriptUrl) { toastMsg('tst', 'Sheet link connected nahi hai', 'te'); return; }
+  toastMsg('tst', 'Sheet se data load ho raha hai...', 'tinf');
+  fetch(CFG.scriptUrl)
+    .then(function(res) { return res.json(); })
+    .then(function(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        toastMsg('tst', 'Sheet khali hai ya format match nahi hua', 'te');
+        return;
       }
-
-      newG.push({
-        sNo: r[0],
-        ciDate: r[1],
-        ciTime: r[2],
-        naam: r[3],
-        aadhaar: r[4],
-        mobile: r[5],
-        room: r[6],
-        state: cleanState, 
-        coDate: r[8] || r[9],
-        coTime: r[10],
-        photoUrl: rawFront,
-        photoUrlBack: rawBack, 
-        status: (r[8] || r[9]) ? 'checked-out' : 'checked-in',
-        kiraya: ''
-      });
-    }
-    newG.reverse();
-    G=newG;
-    localStorage.setItem('svp_guests',JSON.stringify(G));
-    renderGuests();
-    toastMsg('tst',G.length+' records sheet se load hue','ts');
-  }).catch(function(err){
-    toastMsg('tst','Load fail hua: '+err.message,'te');
-  });
+      var newG = [];
+      for (var i = 1; i < rows.length; i++) {
+        var r = rows[i];
+        if (!r[0]) continue;
+        var rawFront = String(r[11] || '');
+        var rawBack = String(r[12] || '');
+        var cleanState = String(r[7] || r[8] || '-').replace(/https?:\/\/[^\s]+/g, '').trim();
+        if (cleanState.indexOf('1899-') !== -1 || cleanState.indexOf('202') !== -1) {
+          cleanState = r[7] && r[7].length < 30 ? r[7] : 'N/A';
+        }
+        newG.push({
+          sNo: r[0],
+          ciDate: r[1],
+          ciTime: r[2],
+          naam: r[3],
+          aadhaar: r[4],
+          mobile: r[5],
+          room: r[6],
+          state: cleanState,
+          coDate: r[8] || r[9],
+          coTime: r[10],
+          photoUrl: rawFront,
+          photoUrlBack: rawBack,
+          status: (r[8] || r[9]) ? 'checked-out' : 'checked-in',
+          kiraya: ''
+        });
+      }
+      newG.reverse();
+      G = newG;
+      localStorage.setItem('svp_guests', JSON.stringify(G));
+      renderGuests();
+      toastMsg('tst', G.length + ' records sheet se load ho gaye', 'ts');
+    })
+    .catch(function(err) {
+      toastMsg('tst', 'Load fail hua: ' + err.message, 'te');
+    });
 }
 
-function renderGuests(){
-  var act=0;
-  for(var k=0;k<G.length;k++){ if(G[k].status==='checked-in'){ act++; } }
-  document.getElementById('st').textContent=G.length;
-  document.getElementById('sa').textContent=act;
-  var totalEarn=0;
-  for(var k2=0;k2<G.length;k2++){ totalEarn+=(Number(G[k2].kiraya)||0); }
-  document.getElementById('se').textContent='\u20b9'+totalEarn.toLocaleString('en-IN');
+/* ---------------- Render Guest Cards ---------------- */
+function renderGuests() {
+  var act = 0;
+  for (var k = 0; k < G.length; k++) { if (G[k].status === 'checked-in') act++; }
+  document.getElementById('st').textContent = G.length;
+  document.getElementById('sa').textContent = act;
+  var totalEarn = 0;
+  for (var k2 = 0; k2 < G.length; k2++) { totalEarn += (Number(G[k2].kiraya) || 0); }
+  document.getElementById('se').textContent = '\u20b9' + totalEarn.toLocaleString('en-IN');
 
-  // Calculate visit counts per mobile number across the entire list
   var visitCounts = {};
-  for(var v=0; v<G.length; v++){
+  for (var v = 0; v < G.length; v++) {
     var mob = G[v].mobile;
-    if(mob){ visitCounts[mob] = (visitCounts[mob] || 0) + 1; }
+    if (mob) visitCounts[mob] = (visitCounts[mob] || 0) + 1;
   }
 
-  var htmlParts=[];
-  for(var idx=0;idx<G.length;idx++){
-    var g=G[idx];
+  var htmlParts = [];
+  for (var idx = 0; idx < G.length; idx++) {
+    var g = G[idx];
     var avatar;
-    if(g.photoUrl && g.photoUrl.indexOf('data:')===0){
-      avatar='<img class="gav" src="'+g.photoUrl+'" alt="Avatar"/>';
-    }else if(g.photoUrl && g.photoUrl.indexOf('http')===0){
-      avatar='<div class="gavp"><i class="ti ti-id"></i></div>';
-    }else{
-      avatar='<div class="gavp"><i class="ti ti-user"></i></div>';
+    if (g.photoUrl && g.photoUrl.indexOf('data:') === 0) {
+      avatar = '<img class="gav" src="' + g.photoUrl + '" alt="Avatar"/>';
+    } else if (g.photoUrl && g.photoUrl.indexOf('http') === 0) {
+      avatar = '<div class="gavp"><i class="ti ti-id"></i></div>';
+    } else {
+      avatar = '<div class="gavp"><i class="ti ti-user"></i></div>';
     }
 
-    var idKey=g.sNo||g.localId;
-    var statusBdg = g.status==='checked-in' ? '<span class="bdg bin">Checked In</span>' : '<span class="bdg bout">Checked Out</span>';
+    var idKey = g.sNo || g.localId;
+    var statusBdg = g.status === 'checked-in' ? '<span class="bdg bin">Checked In</span>' : '<span class="bdg bout">Checked Out</span>';
     var totalVisits = visitCounts[g.mobile] || 1;
-    var visitBdg = '<span class="bdg vcount"><i class="ti ti-history"></i> Visits: '+totalVisits+'</span>';
+    var visitBdg = '<span class="bdg vcount"><i class="ti ti-history"></i> Visits: ' + totalVisits + '</span>';
 
-    var checkoutBtn = g.status==='checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="'+idKey+'"><i class="ti ti-door-exit" style="font-size:18px;"></i> Check Out Now</button>' : '';
+    var checkoutBtn = g.status === 'checked-in' ? '<button type="button" class="abtn bco" data-action="checkout" data-id="' + idKey + '"><i class="ti ti-door-exit" style="font-size:18px;"></i> Check Out Now</button>' : '';
 
-    // ID Links (Clickable Front & Back links, hiding raw drive text strings)
     var photoLink = '';
     if (g.photoUrl && g.photoUrl.length > 5) {
-      photoLink = '<a href="'+g.photoUrl+'" target="_blank"><i class="ti ti-id"></i> Front ID</a>';
+      photoLink = '<a href="' + g.photoUrl + '" target="_blank"><i class="ti ti-id"></i> Front ID</a>';
     }
     var photoLinkBack = '';
     if (g.photoUrlBack && g.photoUrlBack.length > 5) {
-      photoLinkBack = '<a href="'+g.photoUrlBack+'" target="_blank"><i class="ti ti-id"></i> Back ID</a>';
+      photoLinkBack = '<a href="' + g.photoUrlBack + '" target="_blank"><i class="ti ti-id"></i> Back ID</a>';
     }
 
     var checkInDisplay = formatDateTime12Hr(g.ciDate, g.ciTime);
@@ -845,42 +1042,49 @@ function renderGuests(){
         '<div class="gtop">' +
           avatar +
           '<div class="gi">' +
-            '<div class="gn">'+(g.naam||'Guest')+' '+statusBdg+' '+visitBdg+'</div>' +
-            '<div class="gm"><i class="ti ti-phone" style="font-size:13px; color:#2563eb;"></i> '+(g.mobile||'-')+' &nbsp;|&nbsp; <i class="ti ti-door" style="font-size:13px; color:#2563eb;"></i> Room: <b>'+(g.room||'-')+'</b></div>' +
-            '<div class="gm" style="color:#64748b; font-size:12px;"><i class="ti ti-map-pin" style="font-size:13px;"></i> State: <b>'+(g.state || 'N/A')+'</b></div>' +
+            '<div class="gn">' + (g.naam || 'Guest') + ' ' + statusBdg + ' ' + visitBdg + '</div>' +
+            '<div class="gm"><i class="ti ti-phone" style="font-size:13px; color:var(--accent-blue);"></i> ' + (g.mobile || '-') + ' &nbsp;|&nbsp; <i class="ti ti-door" style="font-size:13px; color:var(--accent-blue);"></i> Room: <b>' + (g.room || '-') + '</b></div>' +
+            '<div class="gm" style="color:var(--text-muted); font-size:12px;"><i class="ti ti-map-pin" style="font-size:13px;"></i> State: <b>' + (g.state || 'N/A') + '</b></div>' +
           '</div>' +
         '</div>' +
         '<div class="tinfo">' +
-          '<div class="tinfo-row"><span><i class="ti ti-login"></i> Check In:</span> <span>'+checkInDisplay+'</span></div>' +
-          (g.status==='checked-out' ? '<div class="tinfo-row"><span><i class="ti ti-logout"></i> Check Out:</span> <span>'+checkOutDisplay+'</span></div>' : '') +
-          ((photoLink || photoLinkBack) ? '<div class="id-links">'+photoLink+' '+photoLinkBack+'</div>' : '') +
+          '<div class="tinfo-row"><span><i class="ti ti-login"></i> Check In:</span> <span>' + checkInDisplay + '</span></div>' +
+          (g.status === 'checked-out' ? '<div class="tinfo-row"><span><i class="ti ti-logout"></i> Check Out:</span> <span>' + checkOutDisplay + '</span></div>' : '') +
+          ((photoLink || photoLinkBack) ? '<div class="id-links">' + photoLink + ' ' + photoLinkBack + '</div>' : '') +
         '</div>' +
         checkoutBtn +
       '</div>'
     );
   }
 
-  document.getElementById('gl').innerHTML=htmlParts.join('')||'<div class="card" style="text-align:center;color:#64748b;padding:30px">Koi guest record available nahi hai</div>';
+  document.getElementById('gl').innerHTML = htmlParts.join('') || '<div class="card" style="text-align:center;color:var(--text-muted);padding:30px">Koi guest record available nahi hai</div>';
 
-  var coBtns=document.querySelectorAll('[data-action="checkout"]');
-  for(var c=0;c<coBtns.length;c++){
-    coBtns[c].onclick=function(){ doCheckout(this.getAttribute('data-id')); };
+  var coBtns = document.querySelectorAll('[data-action="checkout"]');
+  for (var c = 0; c < coBtns.length; c++) {
+    coBtns[c].onclick = function() { doCheckout(this.getAttribute('data-id')); };
   }
 }
 
-function doCheckout(idOrSNo){
-  var g=null;
-  for(var i=0;i<G.length;i++){
-    if((G[i].sNo||G[i].localId)===idOrSNo){ g=G[i]; break; }
+/* ---------------- Checkout Action ---------------- */
+function doCheckout(idOrSNo) {
+  var g = null;
+  for (var i = 0; i < G.length; i++) {
+    if ((G[i].sNo || G[i].localId) === idOrSNo) { g = G[i]; break; }
   }
-  if(!g)return;
-  var ni=nowInfo();
-  g.status='checked-out'; g.coDate=ni.date; g.coTime=ni.time;
-  localStorage.setItem('svp_guests',JSON.stringify(G));
+  if (!g) return;
+  var ni = nowInfo();
+  g.status = 'checked-out';
+  g.coDate = ni.date;
+  g.coTime = ni.time;
+  localStorage.setItem('svp_guests', JSON.stringify(G));
   renderGuests();
-  toastMsg('tst', g.naam + ' successfully checked out!','ts');
-  if(CFG.scriptUrl && g.sNo){
-    fetch(CFG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'checkout',sNo:g.sNo,coDate:ni.date,coTime:ni.time})}).catch(function(){});
+  toastMsg('tst', g.naam + ' successfully checked out!', 'ts');
+  if (CFG.scriptUrl && g.sNo) {
+    fetch(CFG.scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'checkout', sNo: g.sNo, coDate: ni.date, coTime: ni.time })
+    }).catch(function() {});
   }
 }
 </script>
